@@ -44,8 +44,8 @@ classdef SimpleTide < ModelUI
             obj.vNumber = '1.0';           
             obj.vDate   = 'Jan 2021';
             obj. modelName = 'SimpleTide';
-            modelLogo = 'ST_logo.jpg';   %splash figure
             
+            modelLogo = 'ST_logo.jpg';   %splash figure            
             initialiseUI(obj,modelLogo); %initialise menus and tabs                  
         end    
         

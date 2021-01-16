@@ -41,7 +41,7 @@ classdef Diffusion2D < muiModelUI
             obj.DataUItabs.Plot = {'2D','3D','4D','2DT','3DT','4DT'};   
             obj.DataUItabs.Stats = {'General','Timeseries','Taylor','Intervals'};  
             
-            modelLogo = 'Diffusion_logo.jpg';
+            modelLogo = 'DF_logo.jpg';
             initialiseUI(obj,modelLogo);    %initialise menus and tabs
         end 
 %% ------------------------------------------------------------------------
