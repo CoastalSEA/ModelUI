@@ -50,7 +50,7 @@ classdef Model_template < muiDataSet                         % << Edit to classn
             %now assign results to object properties  
             modeltime = seconds(modeltime);  %durataion data for rows 
 %--------------------------------------------------------------------------
-% Asign model output to a dstable using the defined dsproperties meta-data
+% Assign model output to a dstable using the defined dsproperties meta-data
 %--------------------------------------------------------------------------                   
             %each variable should be an array in the 'results' cell array
             %if model returns single variable as array of doubles, use {results}

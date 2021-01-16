@@ -1,4 +1,4 @@
-classdef DataImport_template < muiDataSet
+classdef DataImport_template < muiDataSet                    % << Edit to classname
 %
 %-------class help------------------------------------------------------===
 % NAME
@@ -21,7 +21,7 @@ classdef DataImport_template < muiDataSet
     end
     
     methods (Access = private)
-        function obj = DataImport_template()
+        function obj = DataImport_template()                 % << Edit to classname
             %class constructor
         end
     end
@@ -30,16 +30,24 @@ classdef DataImport_template < muiDataSet
     methods (Static)
         function loadData(muicat)
             %read and load a data set from a file
-            obj = demoData;               %initialise class object
+            obj = DataImport_template;                       % << Edit to classname
             [data,~,filename] = readInputData(obj);             
             if isempty(data), return; end
-            dsp = dataDSproperties(obj);  %initialise dsproperties for data
+           
+            %initialise dsproperties for data
+            dsp = dataDSproperties(obj);  
             
-            %load the data
-            [data,time] = getData(obj,data,dsp);
-            %load the results into a dstable            
+            %do any formatting of data necessary (eg sort out date and time
+            %inputs)
+            time = data{1};
+            data = data(2:end);
+            
+            %load the results into a dstable                 % << Edit to dimensions of dataset
             dst = dstable(data{:},'RowNames',time,'DSproperties',dsp);
-            %assign metadata about dagta
+            %if dimensions then extract from input file or load and read
+            % dst.Dimensions.X = dims     
+            
+            %assign metadata about data
             dst.Source = filename;
             %setDataRecord classobj, muiCatalogue obj, dataset, classtype
             setDataRecord(obj,muicat,dst,'data');           
@@ -56,44 +64,25 @@ classdef DataImport_template < muiDataSet
     end
 %%
     methods (Access = private)
-        function [data,header,filename] = readInputData(~)
+        function [data,header,filename] = readInputData(~)   % << Edit to file format being used
             %read wind data (read format is file specific).
             [fname,path,~] = getfiles('FileType','*.txt');
             filename = [path fname];
             dataSpec = '%d %d %s %s %s %s'; 
             nhead = 1;     %number of header lines
             [header,data] = readinputfile(filename,nhead,dataSpec);
-        end     
-%%        
-        function [varData,myDatetime] = getData(~,data,dsp)
-            %format data from file
-            mdat = data{1};       %date
-            mtim = data{2};       %hour 24hr clock
-            idx = mtim==24;
-            mdat(idx) = mdat(idx)+1;
-            mtim(idx) = 0;
-            mdat = datetime(mdat,'ConvertFrom','yyyymmdd');
-            mtim = hours(mtim);
-            % concatenate date and time
-            myDatetime = mdat + mtim;            %datetime for rows
-            myDatetime.Format = dsp.Row.Format;
-            %remove text string flags
-            data(:,3:6) = cellfun(@str2double,data(:,3:6),'UniformOutput',false);
-            %reorder to be speed direction speed direction
-            temp = data(:,3);
-            data(:,3) = data(:,4);
-            data(:,4) = temp;
-            temp = data(:,5);
-            data(:,5) = data(:,6);
-            data(:,6) = temp;
-            varData = data(1,3:end);             %sorted data to be loaded
-        end  
+        end       
 %%        
         function dsp = dataDSproperties(~)
             %define the metadata properties for the demo data set
-            dsp = struct('Variables',[],'Row',[],'Dimensions',[]);           
-            dsp.Variables = struct(...   %cell arrays can be column or row vectors
-                'Name',{'Var1','Var2'},...
+            dsp = struct('Variables',[],'Row',[],'Dimensions',[]);  
+            %define each variable to be included in the data table and any
+            %information about the dimensions. dstable Row and Dimensions can
+            %accept most data types but the values in each vector must be unique
+            
+            %struct entries are cell arrays and can be column or row vectors
+            dsp.Variables = struct(...
+                'Name',{'Var1','Var2'},...                   % <<Edit metadata to suit model
                 'Description',{'Variable 1','Variable 2'},...
                 'Unit',{'m/s','m/s'},...
                 'Label',{'Plot label 1','Plot label 2'},...

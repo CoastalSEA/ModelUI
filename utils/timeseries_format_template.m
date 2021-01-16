@@ -11,7 +11,7 @@ function obj = timeseries_format_template(obj,funcall)
     %----------------------------------------------------------------------
     switch funcall
         case 'getResDef'
-            obj = getResDef(obj);
+            obj = dataDSproperties();
         case 'getTSdata'
             obj = getTSdata(obj);
         case 'dataQC'
@@ -19,25 +19,33 @@ function obj = timeseries_format_template(obj,funcall)
     end
 end
 %%
-function obj = getResDef(obj)
+function dsp = dataDSproperties()
     %define the variables in the dataset
-    r = obj.ResDef;
-    r.DataVar   = {};
-    r.AdnOutVar = {};
-    r.varNames  = {};
-    r.varDesc   = {};                
-    r.varUnits  = {}; 
-    r.varLabels = {};                   
-    r.xyzDesc   = {};
-    r.xyzUnits  = {};
-    r.xyzLabels = {};
-    r.rowDesc   = {};    %used to identify time data
-    r.rowLabels = {};
-    r.rowFormat = {'dd-MM-uuuu HH:mm:ss'};
-    r.xyDefault = {'Time'};    %can be 'Time','X','Y',or Z' 
-    r.Type      = {'data'};
-    r.Style     = {'Single'};
-    obj.ResDef = r;       
+    %define the metadata properties for the demo data set
+    dsp = struct('Variables',[],'Row',[],'Dimensions',[]);  
+    %define each variable to be included in the data table and any
+    %information about the dimensions. dstable Row and Dimensions can
+    %accept most data types but the values in each vector must be unique
+
+    %struct entries are cell arrays and can be column or row vectors
+    dsp.Variables = struct(...
+        'Name',{'Var1','Var2'},...                   % <<Edit metadata to suit model
+        'Description',{'Variable 1','Variable 2'},...
+        'Unit',{'m/s','m/s'},...
+        'Label',{'Plot label 1','Plot label 2'},...
+        'QCflag',{'model','model'}); 
+    dsp.Row = struct(...
+        'Name',{'Time'},...
+        'Description',{'Time'},...
+        'Unit',{'h'},...
+        'Label',{'Time'},...
+        'Format',{'dd-MM-uuuu HH:mm:ss'});        
+    dsp.Dimensions = struct(...    
+        'Name',{''},...
+        'Description',{''},...
+        'Unit',{''},...
+        'Label',{''},...
+        'Format',{''});         
 end
 %%
 function obj = getTSdata(obj)

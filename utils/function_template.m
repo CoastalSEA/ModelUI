@@ -17,7 +17,7 @@ function selection = function_template(varargin)
 %   other code that is relevant
 %
 % Author: Ian Townend
-% CoastalSEA (c)June 2020
+% CoastalSEA (c) Jan 2021
 %--------------------------------------------------------------------------
 %
     selection = [];
