@@ -27,5 +27,9 @@
 % such as CoastalTools and Asmita provide examples of more comple UIs. 
 % Details of how to implement a bespoke user interface are detailed in 
 % the <matlab:open_manual manual>.
+%%
+% The use of manipulation of model output using the Run/Derive Output to
+% launch the muiManipUI is illustrated using the function userderivedoutput.m, 
+% which can be found in the ModelUI/example/Diffusion2D folder. 
 
  

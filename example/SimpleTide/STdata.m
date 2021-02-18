@@ -5,9 +5,9 @@ classdef STdata < muiDataSet
 %   STdata.m
 % PURPOSE
 %   Class to illustrate importing a data set, adding the results to dstable
-%   and a record in a dscatlogue with a method to plot the output
+%   and a record in a dscatlogue (as a property of muiCatalogue)
 % USAGE
-%   obj = DataImport_template.loadData(catobj), where catobj is a handle to a dscatalogue
+%   obj = STdata.loadData(catobj), where catobj is a handle to a muiCatalogue
 % SEE ALSO
 %   inherits muiDataSet and uses dstable and dscatalogue
 %

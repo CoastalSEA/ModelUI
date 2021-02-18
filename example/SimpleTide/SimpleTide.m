@@ -46,14 +46,17 @@ classdef SimpleTide < ModelUI
             obj. modelName = 'SimpleTide';
             
             modelLogo = 'ST_logo.jpg';   %splash figure            
-            initialiseUI(obj,modelLogo); %initialise menus and tabs                  
+            initialiseUI(obj,modelLogo); %initialise menus and tabs  
+            %if required call setAdditionalMenus(obj) here  
+            setAdditionalMenus(obj);
+            setAdditionalTabs(obj)
         end    
         
 %% ------------------------------------------------------------------------
 % Definition of Menu Settings
 %--------------------------------------------------------------------------
         %Use default settings
-        
+
 %% ------------------------------------------------------------------------
 % Definition of Tab Settings
 %--------------------------------------------------------------------------
@@ -66,7 +69,7 @@ classdef SimpleTide < ModelUI
             %               column width, table title}
                                                              % << Edit input properties classnames 
             props = {...                                     % << Add additional inputs and adjust layout
-                'ParamInput_template','Inputs',[0.95,0.48],{180,60},'Input parameters:'};
+                'STparam','Inputs',[0.95,0.48],{180,60},'Input parameters:'};
         end      
         
 %% ------------------------------------------------------------------------

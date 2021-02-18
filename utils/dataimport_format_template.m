@@ -1,5 +1,5 @@
-function obj = timeseries_format_template(obj,funcall)
-    %template to define functions for a timeseries of a given format
+function obj = dataimport_format_template(obj,funcall,src)
+    %template to define functions for a dataset of a given format
     %obj - timeseries class object
     %funcall - function being called
     %----------------------------------------------------------------------
@@ -10,16 +10,21 @@ function obj = timeseries_format_template(obj,funcall)
     % CoastalSEA, (c) 2017
     %----------------------------------------------------------------------
     switch funcall
-        case 'getResDef'
-            obj = dataDSproperties();
-        case 'getTSdata'
-            obj = getTSdata(obj);
+        case 'setDSproperties'
+            obj = setDSproperties();
+        case 'getData'
+            obj = getData(obj);
         case 'dataQC'
             obj = dataQC(obj);
+        case 'getPlot'
+            getPlot(obj,src)
     end
 end
 %%
-function dsp = dataDSproperties()
+%--------------------------------------------------------------------------
+% dataDSproperties
+%--------------------------------------------------------------------------
+function dsp = setDSproperties()
     %define the variables in the dataset
     %define the metadata properties for the demo data set
     dsp = struct('Variables',[],'Row',[],'Dimensions',[]);  
@@ -48,7 +53,10 @@ function dsp = dataDSproperties()
         'Format',{''});         
 end
 %%
-function obj = getTSdata(obj)
+%--------------------------------------------------------------------------
+% getData
+%--------------------------------------------------------------------------
+function obj = getData(obj)
     %read data from file (function is at end of file)
     [~,data] = readInputData(obj);  
     if isempty(data)
@@ -88,7 +96,23 @@ function [header,data] = readInputData(obj)
     fclose(fid);
 end
 %%
+%--------------------------------------------------------------------------
+% dataQC
+%--------------------------------------------------------------------------
 function obj = dataQC(obj)
     %quality control a user data timeseries
     warndlg('No qualtiy control defined for this format');
 end
+%%
+%--------------------------------------------------------------------------
+% getPlot
+%--------------------------------------------------------------------------
+function ok = getPlot(obj,src)
+    %generate a plot on the src graphical object handle    
+    ok = 0;  %ok=0 if no plot implemented in getPlot
+    %return some other value if a plot is implemented here
+    
+end
+
+
+

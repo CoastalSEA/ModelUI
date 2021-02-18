@@ -63,16 +63,18 @@ classdef UseUI_template < muiModelUI                         % << Edit to classn
             %menu. Main menu labels are defined in sequential order and 
             %submenus in order following each brach to the lowest level 
             %before defining the next branch.         
-            
+                                                              % << Edit menu to suit model 
             MenuLabels = {'File','Tools','Project','Setup','Run',...
                                                         'Analysis','Help'};
             menu = menuStruct(obj,MenuLabels);  %create empty menu struct
             %
             %% File menu --------------------------------------------------
+             %list as per muiModelUI.fileMenuOptions
             menu.File.List = {'New','Open','Save','Save as','Exit'};
             menu.File.Callback = repmat({@obj.fileMenuOptions},[1,5]);
             
             %% Tools menu -------------------------------------------------
+            %list as per muiModelUI.toolsMenuOptions
             menu.Tools(1).List = {'Refresh','Clear all'};
             menu.Tools(1).Callback = {@obj.refresh, 'gcbo;'};  
             
@@ -81,16 +83,18 @@ classdef UseUI_template < muiModelUI                         % << Edit to classn
             menu.Tools(2).Callback = repmat({@obj.toolsMenuOptions},[1,3]);
 
             %% Project menu -----------------------------------------------
-            menu.Project(1).List = {'Project Info','Scenarios','Export/Import'};
+            menu.Project(1).List = {'Project Info','Cases','Export/Import'};
             menu.Project(1).Callback = {@obj.editProjectInfo,'gcbo;','gcbo;'};
             
+            %list as per muiModelUI.projectMenuOptions
             % submenu for Scenarios
             menu.Project(2).List = {'Edit Description','Edit Data Set',...
-                                 'Save','Delete','Reload','View settings'};                                               
+                                    'Save Data Set','Delete Case','Reload Case',...
+                                    'View Case Settings'};                                               
             menu.Project(2).Callback = repmat({@obj.projectMenuOptions},[1,6]);
             
             % submenu for 'Export/Import'                                          
-            menu.Project(3).List = {'Export','Import'};
+            menu.Project(3).List = {'Export Case','Import Case'};
             menu.Project(3).Callback = repmat({@obj.projectMenuOptions},[1,2]);
             
             %% Setup menu -------------------------------------------------
@@ -123,13 +127,12 @@ classdef UseUI_template < muiModelUI                         % << Edit to classn
             %format for subtabs: 
             %    subtabs.<tagname>(i,:) = {<subtab label>,<callback function>};
             %where <tagname> is the struct fieldname for the top level tab.
-            tabs.Cases  = {'   Cases  ',@obj.refresh};
+            tabs.Cases  = {'   Cases  ',@obj.refresh};        % << Edit tabs to suit model 
             tabs.Inputs = {'  Inputs  ',@obj.InputTabSummary};
             tabs.Plot   = {'  Q-Plot  ',@obj.getTabData};
-            subtabs = [];
-            % tabs.calcs = {'   Calcs   ',@obj.getTabData};
-            % subtabs.calcs(1,:) = {'  Calc  ',@obj.test};
-            % subtabs.calcs(2,:) = {'  Stats  ',@obj.test};
+            tabs.Stats = {'   Stats   ','gcbo;'};
+            subtabs.Stats(1,:) = {' General ',@obj.getTabData};
+            subtabs.Stats(2,:) = {' Extremes ',@obj.getTabData};
         end
        
 %%
@@ -145,9 +148,11 @@ classdef UseUI_template < muiModelUI                         % << Edit to classn
         function setTabAction(~,src,cobj)
             %function required by GUIinterface and sets action for selected
             %tab (src)
-            switch src.Tag
-                case 'Plot'
+            switch src.Tag                                    % << Edit match tab requirements
+                case 'Plot' 
                      tabPlot(cobj,src);
+                case 'Stats'
+                     tabStats(cobj,src);    
             end
         end      
 %% ------------------------------------------------------------------------
@@ -167,11 +172,14 @@ classdef UseUI_template < muiModelUI                         % << Edit to classn
             %callback functions for data input
             switch src.Text
                 case 'Input parameters'                      % << Edit to call Parameter Input class
-                    ParamInput_template.setParamInput(obj);                             
+                    ParamInput_template.setParamInput(obj);  
+                    %update tab display with input data
                     tabsrc = findobj(obj.mUI.Tabs,'Tag','Inputs');
                     InputTabSummary(obj,tabsrc);
                 case 'Import Data'                           % << Edit to call Data Import class
-                    DataImport_template.loadData(obj.Cases);
+                    % DataImport_template.loadData(obj.Cases);  %direct call
+                    fname = 'DataImport_template.loadData';     %uses heq
+                    callStaticFunction(obj,fname,obj.Cases);
                 case 'Model Constants'
                     obj.Constants = editProperties(obj.Constants);
             end

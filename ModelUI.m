@@ -66,10 +66,12 @@ classdef ModelUI < muiModelUI
             menu = menuStruct(obj,MenuLabels);  %create empty menu struct
             %
             %% File menu --------------------------------------------------
+            %list as per muiModelUI.fileMenuOptions
             menu.File.List = {'New','Open','Save','Save as','Exit'};
             menu.File.Callback = repmat({@obj.fileMenuOptions},[1,5]);
             
             %% Tools menu -------------------------------------------------
+            %list as per muiModelUI.toolsMenuOptions
             menu.Tools(1).List = {'Refresh','Clear all'};
             menu.Tools(1).Callback = {@obj.refresh, 'gcbo;'};  
             
@@ -78,28 +80,34 @@ classdef ModelUI < muiModelUI
             menu.Tools(2).Callback = repmat({@obj.toolsMenuOptions},[1,3]);
 
             %% Project menu -----------------------------------------------
-            menu.Project(1).List = {'Project Info','Scenarios','Export/Import'};
+            menu.Project(1).List = {'Project Info','Cases','Export/Import'};
             menu.Project(1).Callback = {@obj.editProjectInfo,'gcbo;','gcbo;'};
             
+            %list as per muiModelUI.projectMenuOptions
             % submenu for Scenarios
             menu.Project(2).List = {'Edit Description','Edit Data Set',...
-                                 'Save','Delete','Reload','View settings'};                                               
+                                    'Save Data Set','Delete Case','Reload Case',...
+                                    'View Case Settings'};                                               
             menu.Project(2).Callback = repmat({@obj.projectMenuOptions},[1,6]);
             
             % submenu for 'Export/Import'                                          
-            menu.Project(3).List = {'Export','Import'};
+            menu.Project(3).List = {'Export Case','Import Case'};
             menu.Project(3).Callback = repmat({@obj.projectMenuOptions},[1,2]);
             
             %% Setup menu -------------------------------------------------
-            menu.Setup(1).List = {'Input parameters','Import Data','Model Constants'};                                    
-            menu.Setup(1).Callback = repmat({@obj.setupMenuOptions},[1,3]);
+            menu.Setup(1).List = {'Import Data','Input parameters','Model Constants'};                                    
+            menu.Setup(1).Callback = [{'gcbo;'},repmat({@obj.setupMenuOptions},[1,2])];
             
+            % submenu for Import Data (if these are changed need to edit
+            % loadMenuOptions to be match)
+            menu.Setup(2).List = {'Load','Add','Delete','Quality Control'};
+            menu.Setup(2).Callback = repmat({@obj.loadMenuOptions},[1,4]);
             
             %% Run menu ---------------------------------------------------
             menu.Run(1).List = {'Run Model','Derive Output'};
             menu.Run(1).Callback = repmat({@obj.runMenuOptions},[1,2]);
             
-            %% Plot menu --------------------------------------------------  
+            %% Analysis menu --------------------------------------------------  
             menu.Analysis(1).List = {'Plots','Statistics'};
             menu.Analysis(1).Callback = repmat({@obj.analysisMenuOptions},[1,2]);
             
@@ -122,11 +130,9 @@ classdef ModelUI < muiModelUI
             tabs.Cases  = {'   Cases  ',@obj.refresh};
             tabs.Inputs = {'  Inputs  ',@obj.InputTabSummary};
             tabs.Plot   = {'  Q-Plot  ',@obj.getTabData}; %quick plot option
-            subtabs = [];
-            % example of code for 
-            % tabs.Calcs = {'   Calcs   ',@obj.getTabData};
-            % subtabs.Calcs(1,:) = {'  Calc  ',@obj.test};
-            % subtabs.Calcs(2,:) = {'  Stats  ',@obj.test};
+            tabs.Stats = {'   Stats   ','gcbo;'};
+            subtabs.Stats(1,:) = {' General ',@obj.getTabData};
+            subtabs.Stats(2,:) = {' Extremes ',@obj.getTabData};
         end
 %%
         function props = setTabProperties(~)
@@ -143,6 +149,8 @@ classdef ModelUI < muiModelUI
             switch src.Tag
                 case 'Plot'
                     tabPlot(cobj,src);
+                case 'Stats'
+                    tabStats(cobj,src);
             end
         end      
 %% ------------------------------------------------------------------------
@@ -167,11 +175,29 @@ classdef ModelUI < muiModelUI
                     tabsrc = findobj(obj.mUI.Tabs,'Tag','Inputs');
                     InputTabSummary(obj,tabsrc);
                 case 'Import Data'
-                    VPdata.loadData(obj.Cases);
+                    % muiData.loadData(obj.Cases); %direct call
+                    fname = 'muiData.loadData';
+                    callStaticFunction(obj,fname,obj.Cases);
                 case 'Model Constants'
                     obj.Constants = editProperties(obj.Constants);
             end
-        end             
+        end
+        %%
+        function loadpMenuOptions(obj,src,~)
+            %callback functions to import data
+            
+            switch src.Text
+                case 'Load'
+                    
+                case 'Add'
+                    
+                case 'Delete'
+                    
+                case 'Quality Control'
+                    
+            end
+            callStaticFunction(obj,fname,obj.Cases);
+        end
         
         %% Run menu -------------------------------------------------------
         function runMenuOptions(obj,src,~)
@@ -180,7 +206,7 @@ classdef ModelUI < muiModelUI
                 case 'Run Model'
                     VPmodel.runModel(obj); 
                 case 'Derive Output'
-                    obj.mUI.Manip = muiManipUI.getManipUI(obj);
+                    obj.mUI.ManipUI = muiManipUI.getManipUI(obj);
             end            
         end              
             
@@ -188,9 +214,9 @@ classdef ModelUI < muiModelUI
         function analysisMenuOptions(obj,src,~)
             switch src.Text
                 case 'Plots'
-                    obj.mUI.Plots = muiPlotsUI.getPlotsUI(obj);
+                    obj.mUI.PlotsUI = muiPlotsUI.getPlotsUI(obj);
                 case 'Statistics'
-                    obj.mUI.Stats = muiStatsUI.getStatsUI(obj);
+                    obj.mUI.StatsUI = muiStatsUI.getStatsUI(obj);
             end            
         end
 

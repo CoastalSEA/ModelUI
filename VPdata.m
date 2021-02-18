@@ -21,7 +21,7 @@ classdef VPdata < muiDataSet
     end
     
     methods (Access = private)
-        function obj =VPdata()
+        function obj = VPdata()
             %class constructor
         end
     end
@@ -33,14 +33,14 @@ classdef VPdata < muiDataSet
             obj = VPdata;               %initialise class object
             [data,~,filename] = readInputData(obj);             
             if isempty(data), return; end
-            dsp = dataDSproperties(obj);  %initialise dsproperties for data
+            dsp = setDSproperties(obj);  %initialise dsproperties for data
             
             %load the data
 %             [data,time] = getData(obj,data,dsp);
             %load the results into a dstable            
             dst = dstable(data{2},'DSproperties',dsp);
             dst.Dimensions.Z = data{1};     %grid z-coordinate
-            %assign metadata about dagta
+            %assign metadata about data
             dst.Source = filename;
             %setDataRecord classobj, muiCatalogue obj, dataset, classtype
             setDataRecord(obj,muicat,dst,'data');           
@@ -77,7 +77,7 @@ classdef VPdata < muiDataSet
             [header,data] = readinputfile(filename,nhead,dataSpec);
         end      
 %%        
-        function dsp = dataDSproperties(~)
+        function dsp = setDSproperties(~)
             %define the metadata properties for the demo data set
             dsp = struct('Variables',[],'Row',[],'Dimensions',[]);           
             dsp.Variables = struct(...   %cell arrays can be column or row vectors

@@ -5,14 +5,14 @@ classdef DataImport_template < muiDataSet                    % << Edit to classn
 %   DataImport_temaplate.m
 % PURPOSE
 %   Class to illustrate importing a data set, adding the results to dstable
-%   and a record in a dscatlogue with a method to plot the output
+%   and a record in a dscatlogue (as a property of muiCatalogue)
 % USAGE
-%   obj = DataImport_template.loadData(catobj), where catobj is a handle to a dscatalogue
+%   obj = DataImport_template.loadData(catobj), where catobj is a handle to a muiCatalogue
 % SEE ALSO
 %   inherits muiDataSet and uses dstable and dscatalogue
 %
 % Author: Ian Townend
-% CoastalSEA (c) Jam 2021
+% CoastalSEA (c) Jan 2021
 %--------------------------------------------------------------------------
 %    
     properties  

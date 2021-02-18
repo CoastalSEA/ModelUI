@@ -46,19 +46,51 @@ classdef UseModelUI_template < ModelUI                       % << Edit to classn
             obj. modelName = 'UseModelUI_template';          % << Edit to application name
               
             modelLogo = 'mui_logo.jpg';  %default splash figure - edit to alternative
-            initialiseUI(obj,modelLogo); %initialise menus and tabs                  
+            initialiseUI(obj,modelLogo); %initialise menus and tabs   
+            %if required call setAdditionalMenus and/or setAdditionalTabs
+            setAdditionalMenus(obj);
+            setAdditionalTabs(obj)  
         end    
         
 %% ------------------------------------------------------------------------
 % Definition of Menu Settings
 %--------------------------------------------------------------------------
         %Use default settings
-        
+        function setAdditionalMenus(obj)
+            %add to or amend default menu settings。To make major
+            %adjustments overload the setMenus function in ModelUI
+            
+            %demo code to delete menu item
+            % menuname = 'Help';                      
+            % delete(obj.mUI.Menus.(menuname));
+            
+            %demo code to add menu items. Would need function
+            %plotMenuOptions to be added to make operational
+            % menu = menuStruct(obj,{'Plot','Help'});
+            % menu.Plot.List = {'Plot 1','Plot 2'};
+            % menu.Plot.Callback = repmat({@obj.plotMenuOptions},[1,2]);
+            % menu.Help(1).Callback = {@obj.Help};
+            % addAppMenus(obj,menu)
+        end        
 %% ------------------------------------------------------------------------
 % Definition of Tab Settings
 %--------------------------------------------------------------------------
         %Use default settings
-        
+        function setAdditionalTabs(obj)
+            %add to or amend default tab settings. To make major
+            %adjustments overload the setTabs function in ModelUI            
+            
+            %demo code to delete tab
+            % tabname = 'Stats';   
+            % ht = findobj(obj.mUI.Tabs,'Tag',tabname);
+            % delete(ht);
+            
+            %demo code to add tab
+            % tabs.Tide = {'   Tide   ','gcbo;'};
+            % subtabs.Tide(1,:) = {' Constituents ',@obj.getTabData};
+            % subtabs.Tide(2,:) = {' Mean values ',@obj.getTabData};
+            % setAppTabs(obj,tabs,subtabs);            
+        end        
  %%
         function props = setTabProperties(~)
             %define the tab and position to display class data tables

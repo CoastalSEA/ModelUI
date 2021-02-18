@@ -63,10 +63,12 @@ classdef Diffusion2D < muiModelUI
             menu = menuStruct(obj,MenuLabels);  %create empty menu struct
             %
             %% File menu --------------------------------------------------
+            %list as per muiModelUI.fileMenuOptions
             menu.File.List = {'New','Open','Save','Save as','Exit'};
             menu.File.Callback = repmat({@obj.fileMenuOptions},[1,5]);
             
             %% Tools menu -------------------------------------------------
+            %list as per muiModelUI.toolsMenuOptions
             menu.Tools(1).List = {'Refresh','Clear all'};
             menu.Tools(1).Callback = {@obj.refresh, 'gcbo;'};  
             
@@ -78,13 +80,15 @@ classdef Diffusion2D < muiModelUI
             menu.Project(1).List = {'Project Info','Scenarios','Export/Import'};
             menu.Project(1).Callback = {@obj.editProjectInfo,'gcbo;','gcbo;'};
             
+            %list as per muiModelUI.projectMenuOptions
             % submenu for Scenarios
             menu.Project(2).List = {'Edit Description','Edit Data Set',...
-                                 'Save','Delete','Reload','View settings'};                                               
+                                    'Save Data Set','Delete Case','Reload Case',...
+                                    'View Case Settings'};                                               
             menu.Project(2).Callback = repmat({@obj.projectMenuOptions},[1,6]);
             
             % submenu for 'Export/Import'                                          
-            menu.Project(3).List = {'Export','Import'};
+            menu.Project(3).List = {'Export Case','Import Case'};
             menu.Project(3).Callback = repmat({@obj.projectMenuOptions},[1,2]);
             
             %% Setup menu -------------------------------------------------
@@ -119,10 +123,9 @@ classdef Diffusion2D < muiModelUI
             tabs.Cases  = {'   Cases  ',@obj.refresh};
             tabs.Inputs = {'  Inputs  ',@obj.InputTabSummary};
             tabs.Plot   = {'  Q-Plot  ',@obj.getTabData};
-            subtabs = [];
-            % tabs.calcs = {'   Calcs   ',@obj.getTabData};
-            % subtabs.calcs(1,:) = {'  Calc  ',@obj.test};
-            % subtabs.calcs(2,:) = {'  Stats  ',@obj.test};
+            tabs.Stats = {'   Stats   ','gcbo;'};
+            subtabs.Stats(1,:) = {' General ',@obj.getTabData};
+            subtabs.Stats(2,:) = {' Extremes ',@obj.getTabData};
         end
        
 %%
@@ -142,6 +145,8 @@ classdef Diffusion2D < muiModelUI
             switch src.Tag
                 case 'Plot'
                      tabPlot(cobj,src);
+                case 'Stats'
+                    tabStats(cobj,src);     
             end
         end       
         
