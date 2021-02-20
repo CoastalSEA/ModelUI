@@ -26,7 +26,8 @@ classdef ModelUI < muiModelUI
     methods
         function obj = ModelUI
             %constructor function initialises GUI
-            obj = setMUI(obj);
+            obj = setMUI(obj); %use setMUI so that classes that inherit
+                               %ModelUI can overload the function
         end
     end
 %% ------------------------------------------------------------------------
@@ -34,18 +35,19 @@ classdef ModelUI < muiModelUI
 %--------------------------------------------------------------------------  
     methods (Access = protected)
         function obj = setMUI(obj)
-            %initialise standard figure and menus    
-            %classes required to run model           
-            %format: 
+            %initialise standard figure and menus 
+            modelLogo = 'mui_logo.jpg';  %default splash figure - edit to alternative
+            
+            %classes required to run model,format:           
             %obj.ModelInputs.<model classname> = {'Param_class1',Param_class2',etc}
             obj.ModelInputs.VPmodel = {'VPparam'};
+
             %tabs to include in DataUIs for plotting and statistical analysis
             %select which of the options are needed and delete the rest
             obj.DataUItabs.Plot = {'2D','3D','4D','2DT','3DT','4DT'};   
-            obj.DataUItabs.Stats = {'General','Timeseries','Taylor','Intervals'};  
+            obj.DataUItabs.Stats = {'General','Timeseries','Taylor','Intervals'};             
             
-            modelLogo = 'mui_logo.jpg';  %default splash figure - edit to alternative
-            initialiseUI(obj,modelLogo); %initialise menus and tabs                   
+            initialiseUI(obj,modelLogo);        %initialise menus and tabs                   
         end    
 %% ------------------------------------------------------------------------
 % Definition of Menu Settings
@@ -80,7 +82,7 @@ classdef ModelUI < muiModelUI
             menu.Tools(2).Callback = repmat({@obj.toolsMenuOptions},[1,3]);
 
             %% Project menu -----------------------------------------------
-            menu.Project(1).List = {'Project Info','Cases','Export/Import'};
+            menu.Project(1).List = {'Project Info','Cases','Import/Export'};
             menu.Project(1).Callback = {@obj.editProjectInfo,'gcbo;','gcbo;'};
             
             %list as per muiModelUI.projectMenuOptions
@@ -90,8 +92,8 @@ classdef ModelUI < muiModelUI
                                     'View Case Settings'};                                               
             menu.Project(2).Callback = repmat({@obj.projectMenuOptions},[1,6]);
             
-            % submenu for 'Export/Import'                                          
-            menu.Project(3).List = {'Export Case','Import Case'};
+            % submenu for 'Import/Export'                                          
+            menu.Project(3).List = {'Import Case','Export Case'};
             menu.Project(3).Callback = repmat({@obj.projectMenuOptions},[1,2]);
             
             %% Setup menu -------------------------------------------------
@@ -183,19 +185,36 @@ classdef ModelUI < muiModelUI
             end
         end
         %%
-        function loadpMenuOptions(obj,src,~)
+        function loadMenuOptions(obj,src,~)
             %callback functions to import data
+            switch src.Parent.Text
+                case 'Waves'
+                    
+                case 'Water levels'
+                    
+                case 'Winds'
+                     
+                case 'Beach profiles'
+                        
+                case 'Shoreline'
+                         
+                case 'BlueKenue data'
+                    
+                case 'User dataset'                      
+                    classname = 'UserData';                     
+            end            
             
             switch src.Text
                 case 'Load'
-                    
+                    fname = sprintf('%s.loadData',classname);
                 case 'Add'
-                    
+                    fname = sprintf('%s.addData',classname);
                 case 'Delete'
-                    
+                    fname = sprintf('%s.deleteData',classname);
                 case 'Quality Control'
-                    
+                    fname = sprintf('%s.qcData',classname);
             end
+            
             callStaticFunction(obj,fname,obj.Cases);
         end
         

@@ -62,7 +62,7 @@ classdef VPmodel < muiDataSet
             dst.MetaData = sprintf('Model run for cD=%.2f, NK=%.2f, r=%.3f',...
                             inp.cDfriction,inp.NKfriction,inp.Rounghness);
             %save results
-            setDataRecord(obj,mobj.Cases,dst,'model');
+            setDataSetRecord(obj,mobj.Cases,dst,'model');
             getdialog('Run complete');
             mobj.DrawMap;
         end
