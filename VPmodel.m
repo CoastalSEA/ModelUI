@@ -35,7 +35,7 @@ classdef VPmodel < muiDataSet
             
             %now check that the input data has been entered
             %isValidModel checks the InputHandles defined in ModelUI
-            if ~isValidModel(mobj, metaclass(obj).Name)  
+            if ~isValidModel(mobj,metaclass(obj).Name)  
                 warndlg('Use Setup to define model input parameters');
                 return;
             end
@@ -64,14 +64,13 @@ classdef VPmodel < muiDataSet
             %save results
             setDataSetRecord(obj,mobj.Cases,dst,'model');
             getdialog('Run complete');
-            mobj.DrawMap;
         end
     end
 %%
     methods
         function tabPlot(obj,src) %abstract class for muiDataSet
             %generate plot for display on Q-Plot tab
-
+% tabDefaultPlot(obj,src); return;
             %get data for variable and dimension z
             dst = obj.Data{1};
             z = dst.Dimensions.Z;%z co-ordinate data

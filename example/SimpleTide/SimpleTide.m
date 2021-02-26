@@ -28,11 +28,13 @@ classdef SimpleTide < ModelUI
 %--------------------------------------------------------------------------  
     methods (Access = protected)
         function obj = setMUI(obj)
-            %initialise standard figure and menus    
-            %classes required to run model             
-            %format:                                        
+            %initialise standard figure and menus   
+            modelLogo = 'ST_logo.jpg';   %splash figure  
+            
+            %classes required to run model, format:                                        
             %obj.ModelInputs.<model classname> = {'Param_class1',Param_class2',etc}
             obj.ModelInputs.STmodel = {'STparam'};
+            
             %tabs to include in DataUIs for plotting and statistical analysis
             %select which of the options are needed and delete the rest
             %Plot options: '2D','3D','4D','2DT','3DT','4DT'
@@ -44,12 +46,9 @@ classdef SimpleTide < ModelUI
             obj.vNumber = '1.0';           
             obj.vDate   = 'Jan 2021';
             obj. modelName = 'SimpleTide';
-            
-            modelLogo = 'ST_logo.jpg';   %splash figure            
+      
             initialiseUI(obj,modelLogo); %initialise menus and tabs  
-            %if required call setAdditionalMenus(obj) here  
-            setAdditionalMenus(obj);
-            setAdditionalTabs(obj)
+            %if required call setAdditionalMenus and setAdditionalTabs 
         end    
         
 %% ------------------------------------------------------------------------
@@ -84,8 +83,6 @@ classdef SimpleTide < ModelUI
                     STparam.setParamInput(obj);                             
                     tabsrc = findobj(obj.mUI.Tabs,'Tag','Inputs');
                     InputTabSummary(obj,tabsrc);
-                case 'Imported Data'                         
-                    STdata.loadData(obj.Cases);
                 case 'Model Constants'
                     obj.Constants = editProperties(obj.Constants);
             end

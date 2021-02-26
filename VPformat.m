@@ -1,32 +1,17 @@
-function output = dataimport_format_template(funcall,inp1,inp2)
-%
-%-------function help------------------------------------------------------
-% NAME
-%   dataimport_format_template.m
-% PURPOSE
-%   Functions to define metadata, read and load data from file for:
-%   XXXX data format
-% USAGE
-%   obj = dataimport_format_template(obj,funcall)
-% INPUTS
-%   funcall - function being called
-%   inp1 - function specific input (filename or class instance)
-%   inp2 - function specific input (dsp or src)
-% OUTPUT
-%   output - function specific output
-% NOTES
-%   Channel Coastal Observatory (CCO) data
-%   https://www.channelcoast.org/
-%
-% Author: Ian Townend
-% CoastalSEA (c)Feb 2021
-%--------------------------------------------------------------------------
-%
+function output = VPformat(funcall,inp1,inp2)
+    %file format defintions for import of Vertical velocity profile data
+    
+    % funcall - function being called
+    % inp1 - function specific input (filename or class instance)
+    % inp2 - function specific input (dsp or src)
+    %----------------------------------------------------------------------
+    % AUTHOR
+    % Ian Townend
+    %
+    % COPYRIGHT
+    % CoastalSEA, (c) 2017
+    %----------------------------------------------------------------------
     switch funcall
-        %standard calls from muiDataSet - do not change if data class 
-        %inherits from muiDataSet. The function getPlot is called from the
-        %Abstract method tabPlot. The class definition can use tabDefaultPlot
-        %define plot function in the class file, or call getPlot
         case 'setDSproperties'
             output = setDSproperties();
         case 'getData'
@@ -50,39 +35,42 @@ function dsp = setDSproperties()
     %accept most data types but the values in each vector must be unique
 
     %struct entries are cell arrays and can be column or row vectors
-    dsp.Variables = struct(...
-        'Name',{'Var1','Var2'},...                   % <<Edit metadata to suit model
-        'Description',{'Variable 1','Variable 2'},...
-        'Unit',{'m/s','m/s'},...
-        'Label',{'Plot label 1','Plot label 2'},...
-        'QCflag',{'model','model'}); 
+    dsp.Variables = struct(...   %cell arrays can be column or row vectors
+        'Name',{'uObs'},...
+        'Description',{'Observed'},...
+        'Unit',{'m/s'},...
+        'Label',{'Velocity (m/s)'},...
+        'QCflag',{'raw'}); 
     dsp.Row = struct(...
-        'Name',{'Time'},...
-        'Description',{'Time'},...
-        'Unit',{'h'},...
-        'Label',{'Time'},...
-        'Format',{'dd-MM-uuuu HH:mm:ss'});        
-    dsp.Dimensions = struct(...    
         'Name',{''},...
         'Description',{''},...
         'Unit',{''},...
         'Label',{''},...
-        'Format',{''});         
+        'Format',{''});        
+    dsp.Dimensions = struct(...    
+        'Name',{'Z'},...
+        'Description',{'zLevels'},...
+        'Unit',{'m'},...
+        'Label',{'Elevation (mAboveBed)'},...
+        'Format',{'-'});       
 end
 %%
 %--------------------------------------------------------------------------
 % getData
 %--------------------------------------------------------------------------
 function dst = getData(filename,dsp)
+    %read data from file (function is at end of file)
     %read and load a data set from a file
     [data,~] = readInputData(filename);             
     if isempty(data), dst = []; return; end
 
-    %code to parse input data and assign to varData
-    rdata = data{1};
-    vardata = data{2};
+    %do any formatting of data necessary (eg sort out date and time
+    %inputs)
+    
     %load the results into a dstable  
-    dst = dstable(vardata,'RowNames',rdata,'DSproperties',dsp); 
+    dd = reshape(data{2},[1,size(data{2})]);
+    dst = dstable(dd,'DSproperties',dsp);
+    dst.Dimensions.Z = data{1};     %grid z-coordinate    
 end
 %%
 function [data,header] = readInputData(filename)
@@ -90,26 +78,38 @@ function [data,header] = readInputData(filename)
     dataSpec = '%f %f'; 
     nhead = 2;     %number of header lines
     [data,header] = readinputfile(filename,nhead,dataSpec); %see muifunctions
-end
+end    
 %%
 %--------------------------------------------------------------------------
 % dataQC
 %--------------------------------------------------------------------------
-function obj = dataQC(obj)
-    %quality control a dataset
+function ok = dataQC(obj) %#ok<INUSD>
+    %quality control a user data timeseries
     % dataset = getDataSetID(obj); %prompts user to select dataset if more than one
     % dst = obj.Data{dataset};     %selected dstable
-    warndlg('No qualtiy control defined for this format');
+    warndlg('No quality control defined for this format');
     ok = 0;    %ok=0 if no QC implemented in dataQC
 end
 %%
 %--------------------------------------------------------------------------
-% getPlot
+% dataDSproperties
 %--------------------------------------------------------------------------
-function ok = getPlot(obj,src)
+function ok = getPlot(dst,src)
     %generate a plot on the src graphical object handle    
-    ok = 0;  %ok=0 if no plot implemented in getPlot
-    %return some other value if a plot is implemented here
+    ok = 1;  %ok=0 if no plot implemented in getPlot
+    %get data for variable and dimension z
+
+    z = dst.Dimensions.Z;%z co-ordinate data
+
+    %now plot results
+    ht = findobj(src,'Type','axes');
+    delete(ht);
+    ax = axes('Parent',src,'Tag','Profile');
+    plot(dst.uObs,z);
+    xlabel(dst.VariableLabels{1}); 
+    ylabel(dst.DimensionLabels{1}); 
+    title(dst.Description);
+    ax.Color = [0.96,0.96,0.96];  %needs to be set after plot
 end
 
 

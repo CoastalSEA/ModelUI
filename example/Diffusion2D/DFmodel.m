@@ -71,9 +71,8 @@ classdef DFmodel < muiDataSet
             dst.MetaData = sprintf('X&Y Courant Nos: %.3f and %.3f',...
                                 obj.CourantNumber.X,obj.CourantNumber.Y);
             %save results
-            setDataRecord(obj,mobj.Cases,dst,'model');
+            setDataSetRecord(obj,mobj.Cases,dst,'model');
             getdialog('Run complete');
-            mobj.DrawMap;
         end
     end
 %%

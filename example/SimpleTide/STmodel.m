@@ -68,9 +68,9 @@ classdef STmodel < muiDataSet
             dst.Source = metaclass(obj).Name;
             dst.MetaData = sprintf('Model run for %d days',inp.Duration);
             %save results
-            setDataRecord(obj,mobj.Cases,dst,'model');
+            obj.MetaData = {'dst1','dst2'};
+            setDataSetRecord(obj,mobj.Cases,{dst,dst},'model');
             getdialog('Run complete');
-            mobj.DrawMap;
         end
     end
 %%
@@ -78,10 +78,9 @@ classdef STmodel < muiDataSet
         function tabPlot(obj,src) %abstract class for muiDataSet
             %generate plot for display on Q-Plot tab
             dst = obj.Data{1};
-
             ht = findobj(src,'Type','axes');
             delete(ht);
-            ax = axes('Parent',src,'Tag','Profile');
+            ax = axes('Parent',src,'Tag','Qplot');
             plot(dst.RowNames,dst.h);     %plot time v elevation
             xlabel(dst.RowLabel); 
             ylabel(dst.VariableLabels{1});             
@@ -101,8 +100,8 @@ classdef STmodel < muiDataSet
             %struct entries are cell arrays and can be column or row vectors
             dsp.Variables = struct(...                      
                 'Name',{'h','uV','uH'},...
-                'Description',{'Elevation (mOD)','Vertical velocity (m/s)',...
-                                            'Horizontal velocity (m/s)'},...
+                'Description',{'Elevation','Vertical velocity',...
+                                            'Horizontal velocity'},...
                 'Unit',{'mAD','m/s','m/s'},...
                 'Label',{'Elevation (mOD)','Velocity (m/s)','Velocity (m/s)'},...
                 'QCflag',{'model','model','model'}); 

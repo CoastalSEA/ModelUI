@@ -20,47 +20,36 @@ classdef DataImport_template < muiDataSet                    % << Edit to classn
         %Additional properties:  
     end
     
-    methods (Access = private)
+    methods 
         function obj = DataImport_template()                 % << Edit to classname
             %class constructor
+            %initialise list of available input file formats. Format is:
+            %{'label 1','function name 1';'label 2','function name 2'; etc}
+            obj.DataFormats = {'UserData',formatfile};
+            %define file specification, format is: {multiselect,file etnsion types}
+            obj.FileSpec = {'on','*.txt;*.csv'};
         end
-    end
-    
-%%    
-    methods (Static)
-        function loadData(muicat)
-            %read and load a data set from a file
-            obj = DataImport_template;                       % << Edit to classname
-            [data,~,filename] = readInputData(obj);             
-            if isempty(data), return; end
-           
-            %initialise dsproperties for data
-            dsp = dataDSproperties(obj);  
-            
-            %do any formatting of data necessary (eg sort out date and time
-            %inputs)
-            time = data{1};
-            data = data(2:end);
-            
-            %load the results into a dstable                 % << Edit to dimensions of dataset
-            dst = dstable(data{:},'RowNames',time,'DSproperties',dsp);
-            %if dimensions then extract from input file or load and read
-            % dst.Dimensions.X = dims     
-            
-            %assign metadata about data
-            dst.Source = filename;
-            %setDataRecord classobj, muiCatalogue obj, dataset, classtype
-            setDataRecord(obj,muicat,dst,'data');           
-        end 
-    end 
 %%
-    methods
         function tabPlot(obj,src)
             %generate plot for display on Q-Plot tab
+            funcname = 'getPlot';
+            dst = obj.Data{1};
+            [var,ok] = callFileFormatFcn(obj,funcname,dst,src);
+            if ok<1, return; end
             
-            %add code to define plot format or call default tabplot using:
-            tabDSplot(obj,src);
-        end   
+            if var==0  %no plot defined so use muiDataSet default plot
+                tabDefaultPlot(obj,src);
+            end
+        end 
+%%
+        function ok = dataQC(obj)
+            %quality control a dataset
+            % dataset = getDataSetID(obj); %prompts user to select dataset if more than one
+            % dst = obj.Data{dataset};     %selected dstable
+            warndlg('No qualtiy control defined for this format');
+            ok = 0;    %ok=0 if no QC implemented in dataQC
+        end      
+        
     end
 %%
     methods (Access = private)
@@ -70,7 +59,7 @@ classdef DataImport_template < muiDataSet                    % << Edit to classn
             filename = [path fname];
             dataSpec = '%d %d %s %s %s %s'; 
             nhead = 1;     %number of header lines
-            [header,data] = readinputfile(filename,nhead,dataSpec);
+            [data,header] = readinputfile(filename,nhead,dataSpec);
         end       
 %%        
         function dsp = dataDSproperties(~)

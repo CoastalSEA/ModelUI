@@ -176,10 +176,10 @@ classdef ModelUI < muiModelUI
                     VPparam.setParamInput(obj);                             
                     tabsrc = findobj(obj.mUI.Tabs,'Tag','Inputs');
                     InputTabSummary(obj,tabsrc);
-                case 'Import Data'
-                    % muiData.loadData(obj.Cases); %direct call
-                    fname = 'muiData.loadData';
-                    callStaticFunction(obj,fname,obj.Cases);
+%                 case 'Import Data'
+%                     % muiData.loadData(obj.Cases); %direct call
+%                     fname = 'muiData.loadData';
+%                     callStaticFunction(obj,fname,obj.Cases);
                 case 'Model Constants'
                     obj.Constants = editProperties(obj.Constants);
             end
@@ -187,35 +187,37 @@ classdef ModelUI < muiModelUI
         %%
         function loadMenuOptions(obj,src,~)
             %callback functions to import data
-            switch src.Parent.Text
-                case 'Waves'
-                    
-                case 'Water levels'
-                    
-                case 'Winds'
-                     
-                case 'Beach profiles'
-                        
-                case 'Shoreline'
-                         
-                case 'BlueKenue data'
-                    
-                case 'User dataset'                      
-                    classname = 'UserData';                     
-            end            
             
+%             switch src.Parent.Text
+%                 case 'Waves'
+%                     classname = 'WaveData';
+%                 case 'Water levels'
+%                     classname = 'WaterLevelData';
+%                 case 'Winds'
+%                     classname = 'WindData';
+%                 case 'Beach profiles'
+%                     classname = 'BeachProfileData';  
+%                 case 'Shoreline'
+%                     classname = 'ShorelineData';  
+%                 case 'BlueKenue data'
+%                     classname = 'BlueKenueData';  
+%                 case 'User dataset'
+%                     classname = 'UserData';
+%             end
+
+            classname = 'UserData';
             switch src.Text
                 case 'Load'
                     fname = sprintf('%s.loadData',classname);
+                    callStaticFunction(obj,fname,obj.Cases,classname); 
                 case 'Add'
-                    fname = sprintf('%s.addData',classname);
+                    useCase(obj.Cases,'single',classname,'addData');
                 case 'Delete'
-                    fname = sprintf('%s.deleteData',classname);
+                    useCase(obj.Cases,'single',classname,'deleteData');
                 case 'Quality Control'
-                    fname = sprintf('%s.qcData',classname);
+                    useCase(obj.Cases,'single',classname,'qcData');
             end
-            
-            callStaticFunction(obj,fname,obj.Cases);
+            DrawMap(obj);
         end
         
         %% Run menu -------------------------------------------------------
@@ -223,10 +225,11 @@ classdef ModelUI < muiModelUI
             %callback functions to run model
             switch src.Text
                 case 'Run Model'
-                    VPmodel.runModel(obj); 
+                    VPmodel.runModel(obj);                     
                 case 'Derive Output'
                     obj.mUI.ManipUI = muiManipUI.getManipUI(obj);
-            end            
+            end    
+            DrawMap(obj);
         end              
             
         %% Analysis menu ------------------------------------------------------

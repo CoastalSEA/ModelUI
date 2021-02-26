@@ -48,6 +48,14 @@ classdef VPdata < muiDataSet
     end 
 %%
     methods
+        function ok = dataQC(obj)
+            %quality control a dataset
+            % dataset = getDataSetID(obj); %prompts user to select dataset if more than one
+            % dst = obj.Data{dataset};     %selected dstable
+            warndlg('No qualtiy control defined for this format');
+            ok = 0;    %ok=0 if no QC implemented in dataQC
+        end     
+%%
         function tabPlot(obj,src)
             %generate plot for display on Q-Plot tab
             
@@ -74,7 +82,7 @@ classdef VPdata < muiDataSet
             filename = [path fname];
             dataSpec = '%f %f'; 
             nhead = 2;     %number of header lines
-            [header,data] = readinputfile(filename,nhead,dataSpec);
+            [data,header] = readinputfile(filename,nhead,dataSpec);
         end      
 %%        
         function dsp = setDSproperties(~)

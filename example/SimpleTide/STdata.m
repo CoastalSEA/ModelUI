@@ -62,7 +62,7 @@ classdef STdata < muiDataSet
             filename = [path fname];
             dataSpec = '%d %d %s %s %s %s'; 
             nhead = 1;     %number of header lines
-            [header,data] = readinputfile(filename,nhead,dataSpec);
+            [data,header] = readinputfile(filename,nhead,dataSpec);
         end     
 %%        
         function [varData,myDatetime] = getData(~,data,dsp)

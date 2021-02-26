@@ -66,7 +66,6 @@ classdef Model_template < muiDataSet                         % << Edit to classn
             %save results
             setDataRecord(obj,mobj.Cases,dst,'model');
             getdialog('Run complete');
-            mobj.DrawMap;
         end
     end
 %%
