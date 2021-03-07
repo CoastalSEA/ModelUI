@@ -196,9 +196,9 @@ classdef Diffusion2D < muiModelUI
         function analysisMenuOptions(obj,src,~)
             switch src.Text
                 case 'Plots'
-                    obj.mUI.Plots = muiPlotsUI.getPlotsUI(obj);
+                    obj.mUI.PlotsUI = muiPlotsUI.getPlotsUI(obj);
                 case 'Statistics'
-                    obj.mUI.Stats = muiStatsUI.getStatsUI(obj);
+                    obj.mUI.StatsUI = muiStatsUI.getStatsUI(obj);
             end            
         end
 

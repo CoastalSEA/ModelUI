@@ -99,6 +99,7 @@ classdef ModelUI < muiModelUI
             %% Setup menu -------------------------------------------------
             menu.Setup(1).List = {'Import Data','Input parameters','Model Constants'};                                    
             menu.Setup(1).Callback = [{'gcbo;'},repmat({@obj.setupMenuOptions},[1,2])];
+            menu.Setup(1).Separator = {'off','off','on'}; %separator preceeds item
             
             % submenu for Import Data (if these are changed need to edit
             % loadMenuOptions to be match)
@@ -176,40 +177,19 @@ classdef ModelUI < muiModelUI
                     VPparam.setParamInput(obj);                             
                     tabsrc = findobj(obj.mUI.Tabs,'Tag','Inputs');
                     InputTabSummary(obj,tabsrc);
-%                 case 'Import Data'
-%                     % muiData.loadData(obj.Cases); %direct call
-%                     fname = 'muiData.loadData';
-%                     callStaticFunction(obj,fname,obj.Cases);
                 case 'Model Constants'
                     obj.Constants = editProperties(obj.Constants);
             end
         end
-        %%
+%%
         function loadMenuOptions(obj,src,~)
             %callback functions to import data
-            
-%             switch src.Parent.Text
-%                 case 'Waves'
-%                     classname = 'WaveData';
-%                 case 'Water levels'
-%                     classname = 'WaterLevelData';
-%                 case 'Winds'
-%                     classname = 'WindData';
-%                 case 'Beach profiles'
-%                     classname = 'BeachProfileData';  
-%                 case 'Shoreline'
-%                     classname = 'ShorelineData';  
-%                 case 'BlueKenue data'
-%                     classname = 'BlueKenueData';  
-%                 case 'User dataset'
-%                     classname = 'UserData';
-%             end
-
-            classname = 'UserData';
+            classname = 'VPdata_ff';
+%             classname = 'UserData';
             switch src.Text
                 case 'Load'
                     fname = sprintf('%s.loadData',classname);
-                    callStaticFunction(obj,fname,obj.Cases,classname); 
+                    callStaticFunction(obj,classname,fname); 
                 case 'Add'
                     useCase(obj.Cases,'single',classname,'addData');
                 case 'Delete'

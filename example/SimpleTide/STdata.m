@@ -30,7 +30,7 @@ classdef STdata < muiDataSet
     methods (Static)
         function loadData(muicat)
             %read and load a data set from a file
-            obj = demoData;               %initialise class object
+            obj = STdata;               %initialise class object
             [data,~,filename] = readInputData(obj);             
             if isempty(data), return; end
             dsp = dataDSproperties(obj);  %initialise dsproperties for data
@@ -42,7 +42,7 @@ classdef STdata < muiDataSet
             %assign metadata about dagta
             dst.Source = filename;
             %setDataRecord classobj, muiCatalogue obj, dataset, classtype
-            setDataRecord(obj,muicat,dst,'data');           
+            setDataSetRecord(obj,muicat,dst,'data');           
         end 
     end 
 %%
@@ -51,7 +51,7 @@ classdef STdata < muiDataSet
             %generate plot for display on Q-Plot tab
             
             %add code to define plot format or call default tabplot using:
-            tabDSplot(obj,src);
+            tabDefaultPlot(obj,src);
         end   
     end
 %%
@@ -60,56 +60,45 @@ classdef STdata < muiDataSet
             %read wind data (read format is file specific).
             [fname,path,~] = getfiles('FileType','*.txt');
             filename = [path fname];
-            dataSpec = '%d %d %s %s %s %s'; 
+            dataSpec = '%s %s %f %f %f'; 
             nhead = 1;     %number of header lines
             [data,header] = readinputfile(filename,nhead,dataSpec);
         end     
 %%        
         function [varData,myDatetime] = getData(~,data,dsp)
             %format data from file
-            mdat = data{1};       %date
-            mtim = data{2};       %hour 24hr clock
-            idx = mtim==24;
-            mdat(idx) = mdat(idx)+1;
-            mtim(idx) = 0;
-            mdat = datetime(mdat,'ConvertFrom','yyyymmdd');
-            mtim = hours(mtim);
+            %code to parse input data and assign to vardata
+            mdat = datetime(strip(data{1},''''));
+            mtim = datetime(strip(data{2},''''));
+            myDatetime = mdat + timeofday(mtim);
+
             % concatenate date and time
-            myDatetime = mdat + mtim;            %datetime for rows
+            myDatetime = myDatetime-myDatetime(1);
             myDatetime.Format = dsp.Row.Format;
-            %remove text string flags
-            data(:,3:6) = cellfun(@str2double,data(:,3:6),'UniformOutput',false);
-            %reorder to be speed direction speed direction
-            temp = data(:,3);
-            data(:,3) = data(:,4);
-            data(:,4) = temp;
-            temp = data(:,5);
-            data(:,5) = data(:,6);
-            data(:,6) = temp;
-            varData = data(1,3:end);             %sorted data to be loaded
+            varData = data(3:end);             %sorted data to be loaded
         end  
 %%        
         function dsp = dataDSproperties(~)
             %define the metadata properties for the demo data set
             dsp = struct('Variables',[],'Row',[],'Dimensions',[]);           
             dsp.Variables = struct(...   %cell arrays can be column or row vectors
-                'Name',{'Var1','Var2'},...
-                'Description',{'Variable 1','Variable 2'},...
-                'Unit',{'m/s','m/s'},...
-                'Label',{'Plot label 1','Plot label 2'},...
-                'QCflag',{'model','model'}); 
+                'Name',{'h','u','v'},...
+                'Description',{'Elevation','Vertical velocity','Horizontal velocity'},...
+                'Unit',{'mAD','m/s','m/s'},...
+                'Label',{'Elevation (m)','Velocity (m/s)','Velocity (m/s)'},...
+                'QCflag',{'data','data','data'}); 
             dsp.Row = struct(...
                 'Name',{'Time'},...
                 'Description',{'Time'},...
-                'Unit',{'h'},...
+                'Unit',{'d'},...
                 'Label',{'Time'},...
-                'Format',{'dd-MM-uuuu HH:mm:ss'});        
+                'Format',{'d'});        
             dsp.Dimensions = struct(...    
                 'Name',{''},...
                 'Description',{''},...
                 'Unit',{''},...
                 'Label',{''},...
-                'Format',{''});  
+                'Format',{''});   
         end
     end
 end

@@ -48,14 +48,21 @@ classdef SimpleTide < ModelUI
             obj. modelName = 'SimpleTide';
       
             initialiseUI(obj,modelLogo); %initialise menus and tabs  
-            %if required call setAdditionalMenus and setAdditionalTabs 
+            %if required call setAdditionalMenus and setAdditionalTabs
+            setAdditionalMenus(obj);
         end    
         
 %% ------------------------------------------------------------------------
 % Definition of Menu Settings
 %--------------------------------------------------------------------------
         %Use default settings
-
+        function setAdditionalMenus(obj)
+            %remove the sub-menus assigned to Import Data and add new callback 
+            menuname = 'Setup';
+            hm = findSubMenu(obj,menuname,'Import Data');
+            hm.MenuSelectedFcn=@obj.setupMenuOptions; %change menu call fcn
+            delete(hm.Children);                      %delete sub-submenu
+        end 
 %% ------------------------------------------------------------------------
 % Definition of Tab Settings
 %--------------------------------------------------------------------------
@@ -83,6 +90,8 @@ classdef SimpleTide < ModelUI
                     STparam.setParamInput(obj);                             
                     tabsrc = findobj(obj.mUI.Tabs,'Tag','Inputs');
                     InputTabSummary(obj,tabsrc);
+                case 'Import Data'
+                    STdata.loadData(obj.Cases);
                 case 'Model Constants'
                     obj.Constants = editProperties(obj.Constants);
             end

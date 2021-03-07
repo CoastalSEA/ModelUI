@@ -1,29 +1,33 @@
-function output = STformat(funcall,inp1,inp2)
-    %file format defintions for import of tidal elevation data
-    
-    % funcall - function being called
-    % inp1 - function specific input (filename or class instance)
-    % inp2 - function specific input (dsp or src)
-    %----------------------------------------------------------------------
-    % AUTHOR
-    % Ian Townend
-    %
-    % COPYRIGHT
-    % CoastalSEA, (c) 2020
-    %----------------------------------------------------------------------
+function output = STformat(funcall,varargin)
+%
+%-------function help------------------------------------------------------
+% NAME
+%   STformat.m
+% PURPOSE
+%   file format defintions for import of tidal elevation data
+% USAGE
+%   obj = STformat(funcall,varargin)
+% INPUTS
+%   funcall - function being called
+%   varargin - function specific input (filename,class instance,dsp,src, etc)
+% OUTPUT
+%   output - function specific output
+%
+% Author: Ian Townend
+% CoastalSEA (c)Feb 2021
+%--------------------------------------------------------------------------
+%
     switch funcall
         %standard calls from muiDataSet - do not change if data class 
         %inherits from muiDataSet. The function getPlot is called from the
         %Abstract method tabPlot. The class definition can use tabDefaultPlot
         %define plot function in the class file, or call getPlot
-        case 'setDSproperties'
-            output = setDSproperties();
         case 'getData'
-            output = getData(inp1,inp2);
+            output = getData(varargin{:});
         case 'dataQC'
-            output = dataQC(inp1);
+            output = dataQC(varargin{:});
         case 'getPlot'
-            output = getPlot(inp1,inp2);
+            output = getPlot(varargin{:});
     end
 end
 %%
@@ -62,11 +66,13 @@ end
 %--------------------------------------------------------------------------
 % getData
 %--------------------------------------------------------------------------
-function dst = getData(filename,dsp)
+function dst = getData(~,filename)
     %read and load a data set from a file
     [data,~] = readInputData(filename);             
     if isempty(data), dst = []; return; end
-
+    %set metadata
+    dsp = setDSproperties;
+    
     %code to parse input data and assign to vardata
     mdat = datetime(strip(data{1},''''));
     mtim = datetime(strip(data{2},''''));
@@ -102,7 +108,7 @@ end
 %--------------------------------------------------------------------------
 % getPlot
 %--------------------------------------------------------------------------
-function ok = getPlot(obj,src)
+function ok = getPlot(dst,src)
     %generate a plot on the src graphical object handle    
     ok = 0;  %ok=0 if no plot implemented in getPlot
     %return some other value if a plot is implemented here

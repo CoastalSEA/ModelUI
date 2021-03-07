@@ -1,25 +1,31 @@
-function output = VPformat(funcall,inp1,inp2)
-    %file format defintions for import of Vertical velocity profile data
+function output = VPformat(funcall,varargin)
+%
+%-------function help------------------------------------------------------
+% NAME
+%   VPformat.m
+% PURPOSE
+%   file format defintions for import of Vertical velocity profile data
+% USAGE
+%   obj = VPformat(funcall,varargin)
+% INPUTS
+%   funcall - function being called
+%   varargin - function specific input (filename,class instance,dsp,src, etc)
+% OUTPUT
+%   output - function specific output
+%
+% Author: Ian Townend
+% CoastalSEA (c)Feb 2021
+%--------------------------------------------------------------------------
+%
+%     varargin = varargin{:};
     
-    % funcall - function being called
-    % inp1 - function specific input (filename or class instance)
-    % inp2 - function specific input (dsp or src)
-    %----------------------------------------------------------------------
-    % AUTHOR
-    % Ian Townend
-    %
-    % COPYRIGHT
-    % CoastalSEA, (c) 2017
-    %----------------------------------------------------------------------
     switch funcall
-        case 'setDSproperties'
-            output = setDSproperties();
         case 'getData'
-            output = getData(inp1,inp2);
+            output = getData(varargin{:});
         case 'dataQC'
-            output = dataQC(inp1);
+            output = dataQC(varargin{:});
         case 'getPlot'
-            output = getPlot(inp1,inp2);
+            output = getPlot(varargin{:});
     end
 end
 %%
@@ -58,12 +64,14 @@ end
 %--------------------------------------------------------------------------
 % getData
 %--------------------------------------------------------------------------
-function dst = getData(filename,dsp)
+function dst = getData(~,filename)
     %read data from file (function is at end of file)
     %read and load a data set from a file
     [data,~] = readInputData(filename);             
     if isempty(data), dst = []; return; end
-
+    %set metadata
+    dsp = setDSproperties;
+    
     %do any formatting of data necessary (eg sort out date and time
     %inputs)
     
