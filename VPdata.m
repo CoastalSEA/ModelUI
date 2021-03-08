@@ -56,8 +56,8 @@ classdef VPdata
     methods
         function addData(obj,classrec,catrec,muicat) 
             %add additional data to an existing user dataset
-            dataset = getDataSetID(obj);
-            dst = obj.Data{dataset};  
+            datasetname = getDataSetName(obj); %prompts user to select dataset if more than one
+            dst = obj.Data.(datasetname);      %selected dstable 
             
             [data,~,filename] = readInputData(obj);             
             if isempty(data), return; end
@@ -81,15 +81,15 @@ classdef VPdata
             nfile = length(dst.Source);
             dst.Source{nfile+1} = filename;
             
-            obj.Data{dataset} = dst;  
+            obj.Data.(datasetname) = dst;  
             updateCase(muicat,obj,classrec);
             getdialog(sprintf('Data added to: %s',catrec.CaseDescription));
         end
 %%
         function deleteData(obj,classrec,catrec,muicat)
             %delete variable or rows from a dataset
-            dataset = getDataSetID(obj);
-            dst = obj.Data{dataset};
+            datasetname = getDataSetName(obj); %prompts user to select dataset if more than one
+            dst = obj.Data.(datasetname);      %selected dstable 
             
             delist = dst.VariableNames;
             %select variable to use
@@ -107,7 +107,7 @@ classdef VPdata
             if strcmp(selopt,'Yes')
                 dst.(delist{att2use}) = [];  %delete selected variable
 
-                obj.Data{dataset} = dst;            
+                obj.Data.(datasetname) = dst;            
                 updateCase(muicat,obj,classrec);
                 getdialog(sprintf('Data deleted from: %s',catrec.CaseDescription));
             end
@@ -122,7 +122,7 @@ classdef VPdata
             %generate plot for display on Q-Plot tab
             
             %get data for variable and dimension z
-            dst = obj.Data{1};
+            dst = obj.Data.Dataset;
             z = dst.Dimensions.Z;%z co-ordinate data
             
             %now plot results
@@ -156,18 +156,21 @@ classdef VPdata
             muicat.DataSets.(classname)(idrec) = obj;
         end  
 %%
-        function dataset = getDataSetID(obj)
+        function datasetname = getDataSetName(obj)
             %check whether there is more than one dstable and select
             dataset = 1;
-            if ~isempty(obj.MetaData) && length(obj.MetaData)>1
+            datasetnames = fieldnames(obj.Data);
+            if length(datasetnames)>1
                 promptxt = {'Select dataset'};
                 title = 'Save dataset';
                 [dataset,ok] = listdlg('PromptString',promptxt,...
                            'SelectionMode','single','Name',title,...
-                           'ListSize',[300,100],'ListString',obj.MetaData);
+                           'ListSize',[300,100],'ListString',datasetnames);
                 if ok<1, return; end       
-            end            
-        end        
+            end
+            datasetname = datasetnames{dataset};
+        end
+        
 %%        
         function [data,header,filename] = readInputData(~)
             %read wind data (read format is file specific).

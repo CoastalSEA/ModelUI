@@ -93,8 +93,8 @@ end
 %--------------------------------------------------------------------------
 function ok = dataQC(obj) %#ok<INUSD>
     %quality control a user data timeseries
-    % dataset = getDataSetID(obj); %prompts user to select dataset if more than one
-    % dst = obj.Data{dataset};     %selected dstable
+    % datasetname = getDataSetName(obj); %prompts user to select dataset if more than one
+    % dst = obj.Data.(datasetname);      %selected dstable
     warndlg('No quality control defined for this format');
     ok = 0;    %ok=0 if no QC implemented in dataQC
 end
