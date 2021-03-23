@@ -4,5 +4,5 @@ function open_manual()
 toolboxes = matlab.addons.toolbox.installedToolboxes;
 % idx = find(strcmp({toolboxes.Name},'ModelUI'));
 idx = find(strcmp({appinfo.name},'ModelUI'));
-fpath = [toolboxes(idx(1)).location,'/Docs/ModelUI manual.pdf'];
+fpath = [toolboxes(idx(1)).location,'/doc/ModelUI manual.pdf'];
 open(fpath)

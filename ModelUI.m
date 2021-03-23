@@ -15,8 +15,8 @@ classdef ModelUI < muiModelUI
 %
     properties  (Access = protected)
         %implement properties defined as Abstract in muiModelUI
-        vNumber = '2.0'
-        vDate   = 'December 2020'
+        vNumber = '3.0'
+        vDate   = 'May 2021'
         modelName = 'ModelUI'
         %Properties defined in muiModelUI that need to be defined in setGui
         % ModelInputs  %classes required by model: used in isValidModel check 
@@ -68,17 +68,17 @@ classdef ModelUI < muiModelUI
             menu = menuStruct(obj,MenuLabels);  %create empty menu struct
             %
             %% File menu --------------------------------------------------
-            %list as per muiModelUI.fileMenuOptions
+            %list as per callback function muiModelUI.fileMenuOptions
             menu.File.List = {'New','Open','Save','Save as','Exit'};
             menu.File.Callback = repmat({@obj.fileMenuOptions},[1,5]);
             
             %% Tools menu -------------------------------------------------
-            %list as per muiModelUI.toolsMenuOptions
+            %list as per callback function muiModelUI.toolsMenuOptions
             menu.Tools(1).List = {'Refresh','Clear all'};
             menu.Tools(1).Callback = {@obj.refresh, 'gcbo;'};  
             
             % submenu for 'Clear all'
-            menu.Tools(2).List = {'Model','Figures','Cases'};
+            menu.Tools(2).List = {'Project','Figures','Cases'};
             menu.Tools(2).Callback = repmat({@obj.toolsMenuOptions},[1,3]);
 
             %% Project menu -----------------------------------------------
@@ -97,7 +97,7 @@ classdef ModelUI < muiModelUI
             menu.Project(3).Callback = repmat({@obj.projectMenuOptions},[1,2]);
             
             %% Setup menu -------------------------------------------------
-            menu.Setup(1).List = {'Import Data','Input parameters','Model Constants'};                                    
+            menu.Setup(1).List = {'Import Data','Input Parameters','Model Constants'};                                    
             menu.Setup(1).Callback = [{'gcbo;'},repmat({@obj.setupMenuOptions},[1,2])];
             menu.Setup(1).Separator = {'off','off','on'}; %separator preceeds item
             
@@ -173,7 +173,7 @@ classdef ModelUI < muiModelUI
         function setupMenuOptions(obj,src,~)
             %callback functions for data input
             switch src.Text
-                case 'Input parameters'
+                case 'Input Parameters'
                     VPparam.setParamInput(obj);                             
                     tabsrc = findobj(obj.mUI.Tabs,'Tag','Inputs');
                     InputTabSummary(obj,tabsrc);
