@@ -1,6 +1,7 @@
 %% ModelUI Examples
 % A number of models are provided to illustrate a range of possible
-% applications. The details of each model set-up are given in the 
+% applications. This requires the ModelUI App to be installed.
+% The details of each model set-up are given in the 
 % <matlab:open_manual manual>. The files for the demonstration models can be found in
 % the example folder <matlab:example_folder here>. The models are:
 %%

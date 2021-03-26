@@ -23,3 +23,6 @@
 %% Manual
 % The <matlab:open_manual manual> provides further details of setup and 
 % configuration of the model.
+
+%% See Also
+% <matlab:doc('muitoolbox') muitoolbox>, <matlab:doc('dstoolbox') dstoolbox>. 
