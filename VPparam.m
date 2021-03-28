@@ -44,8 +44,7 @@ classdef VPparam < muiPropertyUI
             %constructor code:            
             %values defined in UI function setTabProperties used to assign
             %the tabname and position on tab for the data to be displayed
-            classname = metaclass(obj).Name;
-            obj = setTabProps(obj,mobj,classname);  %muiPropertyUI fcn
+            obj = setTabProps(obj,mobj);  %muiPropertyUI fcn
             
             %to use non-numeric entries then one can either pre-assign 
             %the values in properties defintion, above, or specity the 

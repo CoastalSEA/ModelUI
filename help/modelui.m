@@ -1,9 +1,14 @@
 %% ModelUI
 % ModelUI is a generic interface for bespoke models and data analysis tools.
 
-%% Requirements
+%% Licence
 % The code is provided as Open Source code (issued under a GNU General 
-% Public License). It is written in MATLAB(TM) and requires v2016b, or later.
+% Public License).
+
+%% Requirements
+% ModelUI is written in Matlab(TM) and requires v2016b, or later. In addition, 
+% ModelUI requires both the <matlab:doc('dstoolbox') dstoolbox> and the 
+% <matlab:doc('muitoolbox') muitoolbox>
 
 %% Background
 % ModelUI provides a generic interface for modelling applications that produce 
@@ -16,13 +21,20 @@
 % derivation of new variables, and some basic plotting and statistical tools. 
 
 %%
-%
 % <<schematic.png>>
 
+%% ModelUI classes
+% *ModelUI* - defines the behaviour of the main UI.
+
+%% Demonstration model classes
+% * *VPdata* - import vertical profile velocity data.
+% * *VPmodel* - compute the vertical velocity profile at a point.
+% * *VPparam* - load the input parameters needed to run the model.
 
 %% Manual
 % The <matlab:open_manual manual> provides further details of setup and 
-% configuration of the model.
+% configuration of the model. The files for the example use case can be found in
+% the example folder <matlab:example_folder here>. 
 
 %% See Also
 % <matlab:doc('muitoolbox') muitoolbox>, <matlab:doc('dstoolbox') dstoolbox>. 

@@ -51,8 +51,7 @@ classdef DFparams < muiPropertyUI
             %constructor code:            
             %values defined in UI function setTabProperties used to assign
             %the tabname and position on tab for the data to be displayed
-            classname = metaclass(obj).Name;
-            obj = setTabProps(obj,mobj,classname);  %PropertyInterface fcn
+            obj = setTabProps(obj,mobj);  %PropertyInterface fcn
             
             %to use non-numeric entries then one can either pre-assign 
             %the values in properties defintion, above, or specity the 
