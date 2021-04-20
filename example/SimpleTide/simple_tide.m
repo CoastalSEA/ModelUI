@@ -2,7 +2,7 @@ function tide = simple_tide(inp)
 %
 %-------function help------------------------------------------------------
 % NAME
-%   simple_tide(.m
+%   simple_tide.m
 % PURPOSE
 %   Function to compute a tidal water level time series using main
 %   constituents scaled to required tidal amplitude  
@@ -51,14 +51,20 @@ aO1s = fact*aO1;       %scaled amplitude of O1 constituent
 wO1  = wM2/2;          %angular speed of O1 constituent (rads/s)
 
 tide.t = (0:tint:Dur)';
-for j = 1:length(tide.t)
-    tide.z(j,1) = aM2s*cos(2*wM2*tide.t(j)+pha1)+...
-                 aS2s*cos(2*wS2*tide.t(j)+pha1)+...
-                 aO1s*cos(2*wO1*tide.t(j)+pha1)+z0;
-    tide.dz(j,1) = -2*wM2*aM2s*sin(2*wM2*tide.t(j)+pha1)...
-                -2*wS2*aS2s*sin(2*wS2*tide.t(j)+pha1)...
-                -2*wO1*aO1s*sin(2*wO1*tide.t(j)+pha1);  
-    tide.u(j,1) = -(aM2s*sin(2*wM2*tide.t(j)+pha2)+...
-                 aS2s*sin(2*wS2*tide.t(j)+pha2)+...
-                 aO1s*sin(2*wO1*tide.t(j)+pha2))*U/amp;
+tide.z = aM2s*cos(2*wM2*tide.t+pha1)+...
+                 aS2s*cos(2*wS2*tide.t+pha1)+...
+                 aO1s*cos(2*wO1*tide.t+pha1)+z0;
+
+tide.dz = -2*wM2*aM2s*sin(2*wM2*tide.t+pha1)...
+                -2*wS2*aS2s*sin(2*wS2*tide.t+pha1)...
+                -2*wO1*aO1s*sin(2*wO1*tide.t+pha1);
+
+tide.u = -(aM2s*sin(2*wM2*tide.t+pha2)+...
+                 aS2s*sin(2*wS2*tide.t+pha2)+...
+                 aO1s*sin(2*wO1*tide.t+pha2))*U/amp;
 end
+
+
+
+
+

@@ -68,8 +68,8 @@ classdef STmodel < muiDataSet
             dst.Source = metaclass(obj).Name;
             dst.MetaData = sprintf('Model run for %d days',inp.Duration);
             %save results
-            obj.MetaData = {'dst1','dst2'};
-            setDataSetRecord(obj,mobj.Cases,{dst,dst},'model');
+            dststruct = struct('dst1',dst,'dst2',dst); %add multiple tables
+            setDataSetRecord(obj,mobj.Cases,dststruct,'model');
             getdialog('Run complete');
         end
     end
@@ -77,7 +77,7 @@ classdef STmodel < muiDataSet
     methods
         function tabPlot(obj,src) %abstract class for muiDataSet
             %generate plot for display on Q-Plot tab
-            dst = obj.Data{1};
+            dst = obj.Data.dst2;
             ht = findobj(src,'Type','axes');
             delete(ht);
             ax = axes('Parent',src,'Tag','Qplot');
