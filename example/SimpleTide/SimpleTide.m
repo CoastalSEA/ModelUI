@@ -36,7 +36,7 @@ classdef SimpleTide < ModelUI
             obj.ModelInputs.STmodel = {'STparam'};
             
             %tabs to include in DataUIs for plotting and statistical analysis
-            %select which of the options are needed and delete the rest
+            %select which of the options are needed
             %Plot options: '2D','3D','4D','2DT','3DT','4DT'
             obj.DataUItabs.Plot = {'2D','2DT'};  
             %Statistics options: 'General','Timeseries','Taylor','Intervals'
@@ -87,7 +87,7 @@ classdef SimpleTide < ModelUI
             %callback functions for data input
             switch src.Text
                 case 'Input parameters'                      
-                    STparam.setParamInput(obj);                             
+                    STparam.setInput(obj);                             
                     tabsrc = findobj(obj.mUI.Tabs,'Tag','Inputs');
                     InputTabSummary(obj,tabsrc);
                 case 'Import Data'

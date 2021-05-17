@@ -18,7 +18,7 @@
 % * *Project Info*: edit the Project name and Date
 % * *Cases > Edit Description*: user selects a Case to edit the Case description.
 % * *Cases > Edit Data Set*: initialises the Edit Data UI for editing data sets.
-% * *Cases > Save*: user selects a data set to be saved from a list box of Cases and the is then prompted to name the file. The data are written to an Excel spreadsheet. 
+% * *Cases > Save*: user selects a data set to be saved and is prompted to name the file. The data are  saved as dstable or table to a mat file. 
 % * *Cases > Delete*: user selects Case(s) to be deleted from a list box of Cases and results are then deleted (model setup is not changed).
 % * *Cases > Reload*: user selects a Case to reload as the current parameter settings.
 % * *Cases > View settings*: user selects a Case to display a table listing the parameters used for the selected Case. 
@@ -39,7 +39,7 @@
 % * *Statistics*: initialiss the Statistics UI to select data and run a range of standard statistical methods.
 
 %% Help
-% * *Help*: access the online documentation for CoastalTools.
+% * *Help*: access the online documentation for ModelUI.
 
 %% See Also
 % The <matlab:open_manual manual> provides further details of setup and 

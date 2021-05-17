@@ -17,7 +17,7 @@
 % several output variables that are a funciton of one space dimension. 
 %%
 % _Simple Tide_ inherits ModelUI and modifies the calls to the particualar 
-% application (see <matlab:doc('modelui_gettingstarted') Getting Started> for
+% application (see <matlab:doc('modelui_bespokeui') Bespoke UIs> for
 % details of how to do this).
 %%
 % _2D Diffusion_ implements the muiModelUI interface and has a similar 

@@ -55,7 +55,7 @@ classdef VPparam < muiPropertyUI
     end
 %%  
     methods (Static)  
-        function obj = setParamInput(mobj,editflag)
+        function obj = setInput(mobj,editflag)
             %gui for user to set Parameter Input values
             classname = 'VPparam';
             if isfield(mobj.Inputs,classname) && ...

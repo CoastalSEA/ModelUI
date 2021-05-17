@@ -44,8 +44,10 @@ classdef ModelUI < muiModelUI
 
             %tabs to include in DataUIs for plotting and statistical analysis
             %select which of the options are needed and delete the rest
-            obj.DataUItabs.Plot = {'2D','3D','4D','2DT','3DT','4DT'};   
-            obj.DataUItabs.Stats = {'General','Timeseries','Taylor','Intervals'};             
+            % full list for plots: '2D','3D','4D','2DT','3DT','4DT'
+            obj.DataUItabs.Plot = {'2D','3D'};   
+            % full list for stats: 'General','Timeseries','Taylor','Intervals'
+            obj.DataUItabs.Stats = {'General'};             
             
             initialiseUI(obj,modelLogo);        %initialise menus and tabs                   
         end    
@@ -174,7 +176,7 @@ classdef ModelUI < muiModelUI
             %callback functions for data input
             switch src.Text
                 case 'Input Parameters'
-                    VPparam.setParamInput(obj);                             
+                    VPparam.setInput(obj);                             
                     tabsrc = findobj(obj.mUI.Tabs,'Tag','Inputs');
                     InputTabSummary(obj,tabsrc);
                 case 'Model Constants'
@@ -185,7 +187,7 @@ classdef ModelUI < muiModelUI
         function loadMenuOptions(obj,src,~)
             %callback functions to import data
             classname = 'VPdata_ff';
-%             classname = 'UserData';
+%             classname = 'VPdata';
             switch src.Text
                 case 'Load'
                     fname = sprintf('%s.loadData',classname);
@@ -224,7 +226,7 @@ classdef ModelUI < muiModelUI
 
         %% Help menu ------------------------------------------------------
         function Help(~,~,~)
-            doc ModelUI
+            docsearch ModelUI
         end   
     end    
 end

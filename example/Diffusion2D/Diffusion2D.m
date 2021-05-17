@@ -169,7 +169,7 @@ classdef Diffusion2D < muiModelUI
             %model specific data setup function calls
             switch src.Text
                 case 'Input parameters'
-                    DFparams.setParamInput(obj);                             
+                    DFparams.setInput(obj);                             
                     tabsrc = findobj(obj.mUI.Tabs,'Tag','Inputs');
                     InputTabSummary(obj,tabsrc);
                 case 'Run properties'
@@ -204,7 +204,7 @@ classdef Diffusion2D < muiModelUI
 
         %% Help menu ------------------------------------------------------
         function Help(~,~,~)
-            doc Diffusion
+            docsearch ModelUI
         end     
     end
 end    

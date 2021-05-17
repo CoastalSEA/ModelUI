@@ -62,7 +62,7 @@ classdef DFparams < muiPropertyUI
     end
 %%
     methods (Static)     
-        function setParamInput(mobj,editflag)
+        function setInput(mobj,editflag)
             %gui for user to set Input Data Property values
             classname = 'DFparams';    %define classname
             if isfield(mobj.Inputs,classname) && ...

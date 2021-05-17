@@ -24,7 +24,8 @@
             image="HelpIcon.USER_GUIDE">ModelUI User Guide
             <tocitem target="modelui_menus.html">Menu options</tocitem>    
             <tocitem target="modelui_tabs.html">Tab options</tocitem>    
-            <tocitem target="modelui_examples.html">ModelUI examples</tocitem>  
+            <tocitem target="modelui_examples.html">ModelUI examples</tocitem> 
+            <tocitem target="modelui_bespokeui.html">Bespoke UIs</tocitem>         
         </tocitem>
     </tocitem>    
         <!-- Optional List of Examples, with hyperlinks to examples in other files -->
