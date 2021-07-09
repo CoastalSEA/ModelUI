@@ -82,7 +82,8 @@ classdef DFmodel < muiDataSet
             %data is retrieved by muiModelUI.getTabData
             
             %get data for variable and dimensions x,y,t
-            dst = obj.Data{1};
+            datasetname = getDataSetName(obj);
+            dst = obj.Data.(datasetname);
             t = dst.RowNames;
             u = dst.u;            
             x = dst.Dimensions.X;
