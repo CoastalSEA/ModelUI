@@ -135,9 +135,7 @@ classdef ModelUI < muiModelUI
             tabs.Cases  = {'   Cases  ',@obj.refresh};
             tabs.Inputs = {'  Inputs  ',@obj.InputTabSummary};
             tabs.Plot   = {'  Q-Plot  ',@obj.getTabData}; %quick plot option
-            tabs.Stats = {'   Stats   ','gcbo;'};
-            subtabs.Stats(1,:) = {' General ',@obj.getTabData};
-            subtabs.Stats(2,:) = {' Extremes ',@obj.getTabData};
+            tabs.Stats = {'   Stats   ',@obj.getTabData};
         end
 %%
         function props = setTabProperties(~)
@@ -155,7 +153,9 @@ classdef ModelUI < muiModelUI
                 case 'Plot'
                     tabPlot(cobj,src);
                 case 'Stats'
-                    tabStats(cobj,src);
+                    lobj = getClassObj(obj,'mUI','Stats',msg);
+                    if isempty(lobj), return; end
+                    tabStats(lobj,src); 
             end
         end      
 %% ------------------------------------------------------------------------

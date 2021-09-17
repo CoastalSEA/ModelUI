@@ -25,7 +25,7 @@ function [ut,xy,t] = diffusion2Dmodel(inp,run)
 %         NumScheme           %selected numerical scheme (1 or 2)
 %         is3D - flag to return a pseudo 3D output (XYZT) to test graphics
 % OUTPUTS
-%   ut - transport veoclity vector (m/s)
+%   ut - transport velocity vector (m/s)
 %   xy - x and y co-ordinates of grid (m)
 %   t  - time in seconds
 % NOTES

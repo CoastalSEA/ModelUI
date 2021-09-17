@@ -72,7 +72,7 @@ classdef VPmodel < muiDataSet
             %generate plot for display on Q-Plot tab
 % tabDefaultPlot(obj,src); return;
             %get data for variable and dimension z
-            dst = obj.Data{1};
+            dst = obj.Data.Dataset;
             z = dst.Dimensions.Z;%z co-ordinate data
             ev = dst.VariableNames;
             %now plot results
