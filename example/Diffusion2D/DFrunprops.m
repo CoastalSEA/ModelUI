@@ -53,19 +53,18 @@ classdef DFrunprops < muiPropertyUI
         function setRunProps(mobj,editflag)
             %gui for user to set Run Data Property values
             classname = 'DFrunprops';    %define classname
-            if isfield(mobj.Inputs,classname) && ...
-                            isa(mobj.Inputs.(classname),classname)
-                obj = mobj.Inputs.(classname);   
-            else
-                obj = DFrunprops(mobj);
+            obj = getClassObj(mobj,'Inputs',classname);
+            if isempty(obj)
+                obj = DFrunprops(mobj);        
             end
+            
             %use muiPropertyUI function to generate UI
             if nargin<2 || editflag
                 %add nrec to limit length of props UI (default=12)
                 obj = editProperties(obj);  
                 %add any additional manipulation of the input here
             end
-            mobj.Inputs.(classname) = obj;
+            setClassObj(mobj,'Inputs',classname,obj);
         end
     end    
 %%     

@@ -136,6 +136,7 @@ classdef ModelUI < muiModelUI
             tabs.Inputs = {'  Inputs  ',@obj.InputTabSummary};
             tabs.Plot   = {'  Q-Plot  ',@obj.getTabData}; %quick plot option
             tabs.Stats = {'   Stats   ',@obj.getTabData};
+            subtabs = [];   %empty returned if no subtabs specified
         end
 %%
         function props = setTabProperties(~)
@@ -180,7 +181,7 @@ classdef ModelUI < muiModelUI
                     tabsrc = findobj(obj.mUI.Tabs,'Tag','Inputs');
                     InputTabSummary(obj,tabsrc);
                 case 'Model Constants'
-                    obj.Constants = editProperties(obj.Constants);
+                    obj.Constants = setInput(obj.Constants);
             end
         end
 %%

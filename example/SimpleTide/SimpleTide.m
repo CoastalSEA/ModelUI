@@ -93,7 +93,7 @@ classdef SimpleTide < ModelUI
                 case 'Import Data'
                     STdata.loadData(obj.Cases);
                 case 'Model Constants'
-                    obj.Constants = editProperties(obj.Constants);
+                    obj.Constants = setInput(obj.Constants);
             end
         end             
         %% Run menu -------------------------------------------------------

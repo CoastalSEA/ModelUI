@@ -65,11 +65,9 @@ classdef DFparams < muiPropertyUI
         function setInput(mobj,editflag)
             %gui for user to set Input Data Property values
             classname = 'DFparams';    %define classname
-            if isfield(mobj.Inputs,classname) && ...
-                            isa(mobj.Inputs.(classname),classname)
-                obj = mobj.Inputs.(classname);  
-            else
-                obj = DFparams(mobj);  %instanstiate class instance
+            obj = getClassObj(mobj,'Inputs',classname);
+            if isempty(obj)
+                obj = DFparams(mobj);       
             end
             %use muiPropertyUI function to generate UI
             if nargin<2 || editflag
@@ -77,7 +75,7 @@ classdef DFparams < muiPropertyUI
                 obj = editProperties(obj);  
                 %add any additional manipulation of the input here
             end
-            mobj.Inputs.(classname) = obj;
+            setClassObj(mobj,'Inputs',classname,obj);
         end        
     end    
 %%     

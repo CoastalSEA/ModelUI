@@ -58,11 +58,9 @@ classdef VPparam < muiPropertyUI
         function obj = setInput(mobj,editflag)
             %gui for user to set Parameter Input values
             classname = 'VPparam';
-            if isfield(mobj.Inputs,classname) && ...
-                            isa(mobj.Inputs.(classname),classname)
-                obj = mobj.Inputs.(classname);  
-            else
-                obj = VPparam(mobj);  %instanstiate class instance
+            obj = getClassObj(mobj,'Inputs',classname);
+            if isempty(obj)
+                obj = VPparam(mobj);            
             end
             %use muiPropertyUI function to generate UI
             if nargin<2 || editflag
@@ -70,7 +68,7 @@ classdef VPparam < muiPropertyUI
                 obj = editProperties(obj);  
                 %add any additional manipulation of the input here
             end
-            mobj.Inputs.(classname) = obj;
+            setClassObj(mobj,'Inputs',classname,obj);
         end     
     end
 %%        
