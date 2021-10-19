@@ -124,6 +124,7 @@ classdef Diffusion2D < muiModelUI
             tabs.Inputs = {'  Inputs  ',@obj.InputTabSummary};
             tabs.Plot   = {'  Q-Plot  ',@obj.getTabData};
             tabs.Stats = {'   Stats   ',@obj.getTabData};
+            subtabs = [];
         end
        
 %%
