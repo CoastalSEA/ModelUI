@@ -115,7 +115,7 @@ classdef VPdata
 %%
         function qcData(obj,classrec,catrec,muicat)
             %quality control a dataset
-            warndlg('No qualtiy control defined for this format');
+            warndlg('No quality control defined for this format');
         end     
 %%
         function tabPlot(obj,src)

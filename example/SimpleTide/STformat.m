@@ -101,7 +101,7 @@ function ok = dataQC(obj)
     %quality control a dataset
     % datasetname = getDataSetName(obj); %prompts user to select dataset if more than one
     % dst = obj.Data.(datasetname);      %selected dstable
-    warndlg('No qualtiy control defined for this format');
+    warndlg('No quality control defined for this format');
     ok = 0;    %ok=0 if no QC implemented in dataQC
 end
 %%
