@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ModelUI Examples</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-05-04"><meta name="DC.source" content="modelui_examples.m"><style type="text/css">
+      --><title>ModelUI Examples</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-20"><meta name="DC.source" content="modelui_examples.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,7 +67,10 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>ModelUI Examples</h1><!--introduction--><p>A number of models are provided to illustrate a range of possible applications. This requires the ModelUI App to be installed. The details of each model set-up are given in the <a href="matlab:open_manual">manual</a>. The files for the demonstration models can be found in the example folder <a href="matlab:example_folder">here</a>. The models are:</p><!--/introduction--><div><ul><li>Vertical Profile - model to compute vertical structure of tidal currents using several different eddy viscosity formulations.</li><li>Simple tide - a tide emulator to output a synthetic data set of elevations or velocities.</li><li>2D Diffusion - implements the 2-D Diffusion equation to illustrate the handling of multi-dimensional variables and the underlying model is from the Matlab (c) Forum by Suraj Shanka, Copyright (c) 2012.</li></ul></div><p>ModelUI implements the <i>Vertical Profile</i> model and illustrates a model with several output variables that are a funciton of one space dimension.</p><p><i>Simple Tide</i> inherits ModelUI and modifies the calls to the particualar application (see <a href="matlab:doc('modelui_bespokeui')">Bespoke UIs</a> for details of how to do this).</p><p><i>2D Diffusion</i> implements the muiModelUI interface and has a similar layout to the ModelUI implementation of the muiModelUI interface. Implementing the muiModelUI interface, rather than simiply inheriting the ModelUI implementation, provides a greater ability to customise the interface to meet the specific needs of an application. ModelUI Apps, such as CoastalTools and Asmita provide examples of more comple UIs. Details of how to implement a bespoke user interface are detailed in the <a href="matlab:open_manual">manual</a>.</p><p>The use of manipulation of model output, using the Run&gt;Derive Output menu option to launch the muiManipUI, is illustrated by the function userderivedoutput.m, which can be found in the ModelUI/example/Diffusion2D folder.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+  </style></head><body><div class="content"><h1>ModelUI Examples</h1><!--introduction--><p>A number of models are provided to illustrate a range of possible applications. This requires the ModelUI App to be installed. The details of each model set-up are given in the <a href="matlab:open_manual">manual</a>. The files for the demonstration models can be found in the example folder <a href="matlab:example_folder">here</a>. The models are:</p><!--/introduction--><div><ul><li>Vertical Profile - model to compute vertical structure of tidal currents using several different eddy viscosity formulations.</li><li>Simple tide - a tide emulator to output a synthetic data set of elevations or velocities.</li><li>2D Diffusion - implements the 2-D Diffusion equation to illustrate the handling of multi-dimensional variables and the underlying model is from the Matlab (c) Forum by Suraj Shanka, Copyright (c) 2012.</li></ul></div><p>ModelUI implements the <i>Vertical Profile</i> model and illustrates a model with several output variables that are a funciton of one space dimension.</p><p><i>Simple Tide</i> inherits ModelUI and modifies the calls to the particualar application (see <a href="matlab:doc('modelui_bespokeui')">Bespoke UIs</a> for details of how to do this).</p><pre>Note: because SimpleTide uses ModelUI as a super class, if ModelUI has
+not been used or initialised, then the paths will not be set to find and
+run the SimpleTide model. The function run_SimpleTide.m intialises the
+paths and calls SimpleTide.</pre><p><i>2D Diffusion</i> implements the muiModelUI interface and has a similar layout to the ModelUI implementation of the muiModelUI interface. Implementing the muiModelUI interface, rather than simiply inheriting the ModelUI implementation, provides a greater ability to customise the interface to meet the specific needs of an application. ModelUI Apps, such as CoastalTools and Asmita provide examples of more comple UIs. Details of how to implement a bespoke user interface are detailed in the <a href="matlab:open_manual">manual</a>.</p><p>The use of manipulation of model output, using the Run&gt;Derive Output menu option to launch the muiManipUI, is illustrated by the function userderivedoutput.m, which can be found in the ModelUI/example/Diffusion2D folder.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% ModelUI Examples
 % A number of models are provided to illustrate a range of possible
@@ -89,7 +92,13 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 %%
 % _Simple Tide_ inherits ModelUI and modifies the calls to the particualar 
 % application (see <matlab:doc('modelui_bespokeui') Bespoke UIs> for
-% details of how to do this).
+% details of how to do this). 
+%%
+%  Note: because SimpleTide uses ModelUI as a super class, if ModelUI has 
+%  not been used or initialised, then the paths will not be set to find and 
+%  run the SimpleTide model. The function run_SimpleTide.m intialises the
+%  paths and calls SimpleTide.
+%  
 %%
 % _2D Diffusion_ implements the muiModelUI interface and has a similar 
 % layout to the ModelUI implementation of the muiModelUI interface.

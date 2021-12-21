@@ -18,7 +18,13 @@
 %%
 % _Simple Tide_ inherits ModelUI and modifies the calls to the particualar 
 % application (see <matlab:doc('modelui_bespokeui') Bespoke UIs> for
-% details of how to do this).
+% details of how to do this). 
+%%
+%  Note: because SimpleTide uses ModelUI as a super class, if ModelUI has 
+%  not been used or initialised, then the paths will not be set to find and 
+%  run the SimpleTide model. The function run_SimpleTide.m intialises the
+%  paths and calls SimpleTide.
+%  
 %%
 % _2D Diffusion_ implements the muiModelUI interface and has a similar 
 % layout to the ModelUI implementation of the muiModelUI interface.

@@ -20,7 +20,7 @@ classdef SimpleTide < ModelUI
     
     methods (Static)
         function obj = SimpleTide
-            %constructor function initialises UI using ModelUI constructor            
+            %constructor function initialises UI using ModelUI constructor
         end
     end
 %% ------------------------------------------------------------------------
