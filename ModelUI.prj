@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="3552774221" file="D:\Work\Tools\MATLAB\MUImodels2\muiApps\ModelUI\ModelUI.prj" location="D:\Work\Tools\MATLAB\MUImodels2\muiApps\ModelUI" name="ModelUI" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="313340122" file="D:\Work\Tools\MATLAB\MUImodels2\muiApps\ModelUI\ModelUI.prj" location="D:\Work\Tools\MATLAB\MUImodels2\muiApps\ModelUI" name="ModelUI" target="target.mlapps" target-name="Package App">
     <param.appname>ModelUI</param.appname>
     <param.authnamewatermark>Ian Townend</param.authnamewatermark>
     <param.email>i.townend@soton.ac.uk</param.email>
@@ -16,7 +16,7 @@ VerticalProfile to illustrate the basic UI and a simple model producing spatial 
 SimpleTide to illustrate handling timeseries data in a similar UI.
 Diffusion2D to illustrate how to handle time plus 2 or 3 space dimensions.</param.description>
     <param.screenshot>D:\Work\Tools\MATLAB\MUImodels2\muiApps\muiAppLogos\ModelUI_logo.png</param.screenshot>
-    <param.version>3.0</param.version>
+    <param.version>3.01</param.version>
     <param.products.name>
       <item>MATLAB</item>
     </param.products.name>
