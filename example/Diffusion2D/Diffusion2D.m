@@ -205,7 +205,7 @@ classdef Diffusion2D < muiModelUI
 
         %% Help menu ------------------------------------------------------
         function Help(~,~,~)
-            docsearch ModelUI
+            doc modelui
         end     
     end
 end    
