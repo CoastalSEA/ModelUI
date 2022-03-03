@@ -147,9 +147,10 @@ classdef ModelUI < muiModelUI
                 'VPparam','Inputs',[0.95,0.48],{180,60},'Input parameters:'};
         end
 %%
-        function setTabAction(~,src,cobj)
+        function setTabAction(obj,src,cobj)
             %function required by GUIinterface and sets action for selected
             %tab (src)
+            msg = 'No results to display';
             switch src.Tag
                 case 'Plot'
                     tabPlot(cobj,src);
