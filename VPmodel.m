@@ -70,15 +70,14 @@ classdef VPmodel < muiDataSet
     methods
         function tabPlot(obj,src) %abstract class for muiDataSet
             %generate plot for display on Q-Plot tab
-% tabDefaultPlot(obj,src); return;
+            % tabDefaultPlot(obj,src); return;
+            tabcb  = @(src,evdat)tabPlot(obj,src);
+            ax = tabfigureplot(obj,src,tabcb,false);            
             %get data for variable and dimension z
             dst = obj.Data.Dataset;
             z = dst.Dimensions.Z;%z co-ordinate data
             ev = dst.VariableNames;
             %now plot results
-            ht = findobj(src,'Type','axes');
-            delete(ht);
-            ax = axes('Parent',src,'Tag','Profile');
             plot(dst.uB,z,dst.uK,z,dst.uS,z);
             xlabel(dst.VariableLabels{1}); 
             ylabel(dst.DimensionLabels{1}); 

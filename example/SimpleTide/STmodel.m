@@ -77,10 +77,10 @@ classdef STmodel < muiDataSet
     methods
         function tabPlot(obj,src) %abstract class for muiDataSet
             %generate plot for display on Q-Plot tab
+            tabcb  = @(src,evdat)tabPlot(obj,src);
+            ax = tabfigureplot(obj,src,tabcb,false);            
+            
             dst = obj.Data.dst2;
-            ht = findobj(src,'Type','axes');
-            delete(ht);
-            ax = axes('Parent',src,'Tag','Qplot');
             plot(dst.RowNames,dst.h);     %plot time v elevation
             xlabel(dst.RowLabel); 
             ylabel(dst.VariableLabels{1});             

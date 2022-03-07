@@ -80,7 +80,8 @@ classdef DFmodel < muiDataSet
         function tabPlot(obj,src) %abstract class for muiDataSet
             %generate plot for display on Plot tab
             %data is retrieved by muiModelUI.getTabData
-            
+            tabcb  = @(src,evdat)tabPlot(obj,src);
+            ax = tabfigureplot(obj,src,tabcb,false);            
             %get data for variable and dimensions x,y,t
             datasetname = getDataSetName(obj);
             dst = obj.Data.(datasetname);
@@ -99,13 +100,8 @@ classdef DFmodel < muiDataSet
                 warndlg('Unable to plot data. Use Plot Gui to make data selection')
                 return;
             end
-            
-            %clear any existing plot on the tab
-            ht = findobj(src,'Type','axes');
-            delete(ht);
-            
+
             %create base plot
-            ax = axes('Parent',src,'Tag','Surface');
             ui = squeeze(u(1,:,:))';
             h = surf(ax,x,y,ui,'EdgeColor','none'); 
             shading interp
