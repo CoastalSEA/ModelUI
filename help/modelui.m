@@ -32,9 +32,9 @@
 % * *VPparam* - load the input parameters needed to run the model.
 
 %% Manual
-% The <matlab:open_manual manual> provides further details of setup and 
+% The <matlab:mui_open_manual manual> provides further details of setup and 
 % configuration of the model. The files for the example use case can be found in
-% the example folder <matlab:example_folder here>. 
+% the example folder <matlab:mui_example_folder here>. 
 
 %% See Also
 % <matlab:doc('muitoolbox') muitoolbox>, <matlab:doc('dstoolbox') dstoolbox>. 

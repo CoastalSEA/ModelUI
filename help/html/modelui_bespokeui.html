@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Using ModelUI to create bespoke UIs</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-05-04"><meta name="DC.source" content="modelui_bespokeui.m"><style type="text/css">
+      --><title>Using ModelUI to create bespoke UIs</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-12-21"><meta name="DC.source" content="modelui_bespokeui.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,12 +67,12 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Using ModelUI to create bespoke UIs</h1><!--introduction--><p>The steps below outline how to setup a bespoke application of ModelUI by modifying the default UI. How to develop more complex UIs is explained in the <a href="matlab:open_manual">ModelUI manual</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Implementation steps</a></li><li><a href="#4">See Also</a></li></ul></div><h2 id="1">Implementation steps</h2><div><ol><li>Decide on what components are needed. These might include: <br>   o UI - the main interface for the application  <br>   o Data import - load different types of data <br>   o Input parameters - define any parameters needed for the application <br>   o Model(s) - initialise and call any models to be run by the application.  <br></li><li>Give names to each component, e.g.: <br>   ModelUI, demoData, demoProps, demoModel</li><li>Copy the class templates for the components from here to your working folder</li><li>Create classes for each component by editing the templates as illustrated   for each template below.</li></ol></div><p>Templates for the main components are provided in the muitemplates folder, which can be found <a href="matlab:template_folder">here</a>. The templates provide the code for each component and the comments highlight where the files need to be edited to adapt the templates to a different application.</p><p>The  <a href="matlab:doc('muitoolbox')">muitoolbox</a> <i>Getting Started</i> documentation provides further details of how to modify each of the templates.</p><h2 id="4">See Also</h2><p>A full list of the <a href="matlab:doc('muitemplates')">Templates</a> which can be found in the templates folder <a href="matlab:template_folder">here</a>.  <br> <a href="matlab:doc('modelui_examples')">Examples</a> of using the interface for different applications. The files for these examples can be found in the example folder <a href="matlab:example_folder">here</a>.  <br> <a href="matlab:doc('muitoolbox')">muitoolbox</a> documentation for details of the <i>muiModelUI</i> abstract interface class and the other UIs used in <i>ModelUI</i>. <br> <a href="matlab:doc('dstoolbox')">dstoolbox</a> documentation for details of <i>dstable</i> and <i>dsproperties</i>. <br> The demonstration UI provided in the <a href="matlab:doc('modelui')">ModelUI</a> App.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+  </style></head><body><div class="content"><h1>Using ModelUI to create bespoke UIs</h1><!--introduction--><p>The steps below outline how to setup a bespoke application of ModelUI by modifying the default UI. How to develop more complex UIs is explained in the <a href="matlab:mui_open_manual">ModelUI manual</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Implementation steps</a></li><li><a href="#4">See Also</a></li></ul></div><h2 id="1">Implementation steps</h2><div><ol><li>Decide on what components are needed. These might include: <br>   o UI - the main interface for the application  <br>   o Data import - load different types of data <br>   o Input parameters - define any parameters needed for the application <br>   o Model(s) - initialise and call any models to be run by the application.  <br></li><li>Give names to each component, e.g.: <br>   ModelUI, demoData, demoProps, demoModel</li><li>Copy the class templates for the components from here to your working folder</li><li>Create classes for each component by editing the templates as illustrated   for each template below.</li></ol></div><p>Templates for the main components are provided in the muitemplates folder, which can be found <a href="matlab:mui_template_folder">here</a>. The templates provide the code for each component and the comments highlight where the files need to be edited to adapt the templates to a different application.</p><p>The  <a href="matlab:doc('muitoolbox')">muitoolbox</a> <i>Getting Started</i> documentation provides further details of how to modify each of the templates.</p><h2 id="4">See Also</h2><p>A full list of the <a href="matlab:doc('muitemplates')">Templates</a> which can be found in the templates folder <a href="matlab:mui_template_folder">here</a>.  <br> <a href="matlab:doc('modelui_examples')">Examples</a> of using the interface for different applications. The files for these examples can be found in the example folder <a href="matlab:mui_example_folder">here</a>.  <br> <a href="matlab:doc('muitoolbox')">muitoolbox</a> documentation for details of the <i>muiModelUI</i> abstract interface class and the other UIs used in <i>ModelUI</i>. <br> <a href="matlab:doc('dstoolbox')">dstoolbox</a> documentation for details of <i>dstable</i> and <i>dsproperties</i>. <br> The demonstration UI provided in the <a href="matlab:doc('modelui')">ModelUI</a> App.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Using ModelUI to create bespoke UIs
 % The steps below outline how to setup a bespoke application of ModelUI
 % by modifying the default UI. How to develop more complex UIs is explained
-% in the <matlab:open_manual ModelUI manual>.
+% in the <matlab:mui_open_manual ModelUI manual>.
 
 %% Implementation steps
 % # Decide on what components are needed. These might include: <br>
@@ -88,7 +88,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 %%
 % Templates for the main components are provided in the muitemplates 
-% folder, which can be found <matlab:template_folder here>. The templates 
+% folder, which can be found <matlab:mui_template_folder here>. The templates 
 % provide the code for each component and the comments highlight where the 
 % files need to be edited to adapt the templates to a different application. 
 %%
@@ -98,10 +98,10 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 %% See Also
 % A full list of the <matlab:doc('muitemplates') Templates> which can be found in
-% the templates folder <matlab:template_folder here>.  <br>
+% the templates folder <matlab:mui_template_folder here>.  <br>
 % <matlab:doc('modelui_examples') Examples> of using the interface for
 % different applications. The files for these examples can be found in
-% the example folder <matlab:example_folder here>.  <br>
+% the example folder <matlab:mui_example_folder here>.  <br>
 % <matlab:doc('muitoolbox') muitoolbox> documentation for details of the
 % _muiModelUI_ abstract interface class and the other UIs used in _ModelUI_. <br>
 % <matlab:doc('dstoolbox') dstoolbox> documentation for details of 

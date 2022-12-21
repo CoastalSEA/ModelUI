@@ -1,7 +1,7 @@
 %% Using ModelUI to create bespoke UIs
 % The steps below outline how to setup a bespoke application of ModelUI
 % by modifying the default UI. How to develop more complex UIs is explained
-% in the <matlab:open_manual ModelUI manual>.
+% in the <matlab:mui_open_manual ModelUI manual>.
 
 %% Implementation steps
 % # Decide on what components are needed. These might include: <br>
@@ -17,7 +17,7 @@
 
 %%
 % Templates for the main components are provided in the muitemplates 
-% folder, which can be found <matlab:template_folder here>. The templates 
+% folder, which can be found <matlab:mui_template_folder here>. The templates 
 % provide the code for each component and the comments highlight where the 
 % files need to be edited to adapt the templates to a different application. 
 %%
@@ -27,10 +27,10 @@
 
 %% See Also
 % A full list of the <matlab:doc('muitemplates') Templates> which can be found in
-% the templates folder <matlab:template_folder here>.  <br>
+% the templates folder <matlab:mui_template_folder here>.  <br>
 % <matlab:doc('modelui_examples') Examples> of using the interface for
 % different applications. The files for these examples can be found in
-% the example folder <matlab:example_folder here>.  <br>
+% the example folder <matlab:mui_example_folder here>.  <br>
 % <matlab:doc('muitoolbox') muitoolbox> documentation for details of the
 % _muiModelUI_ abstract interface class and the other UIs used in _ModelUI_. <br>
 % <matlab:doc('dstoolbox') dstoolbox> documentation for details of 
