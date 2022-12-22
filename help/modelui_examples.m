@@ -2,8 +2,8 @@
 % A number of models are provided to illustrate a range of possible
 % applications. This requires the ModelUI App to be installed.
 % The details of each model set-up are given in the 
-% <matlab:mui_open_manual manual>. The files for the demonstration models can be found in
-% the example folder <matlab:example_folder here>. The models are:
+% <matlab:mmui_open_manual manual>. The files for the demonstration models can be found in
+% the example folder <matlab:mmui_example_folder here>. The models are:
 %%
 % * Vertical Profile - model to compute vertical structure of tidal
 % currents using several different eddy viscosity formulations.
@@ -33,7 +33,7 @@
 % interface to meet the specific needs of an application. ModelUI Apps, 
 % such as CoastalTools and Asmita provide examples of more comple UIs. 
 % Details of how to implement a bespoke user interface are detailed in 
-% the <matlab:mui_open_manual manual>.
+% the <matlab:mmui_open_manual manual>.
 %%
 % The use of manipulation of model output, using the Run>Derive Output menu option to
 % launch the muiManipUI, is illustrated by the function userderivedoutput.m, 

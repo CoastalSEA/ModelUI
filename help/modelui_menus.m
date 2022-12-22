@@ -47,5 +47,5 @@
 % * *Help*: access the online documentation for ModelUI.
 
 %% See Also
-% The <matlab:mui_open_manual manual> provides further details of setup and 
+% The <matlab:mmui_open_manual manual> provides further details of setup and 
 % configuration of the model.

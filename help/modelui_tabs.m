@@ -18,5 +18,5 @@
 % model used.
 
 %% See Also
-% The <matlab:mui_open_manual manual> provides further details of setup and 
+% The <matlab:mmui_open_manual manual> provides further details of setup and 
 % configuration of the model.

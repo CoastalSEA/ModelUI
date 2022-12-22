@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="2793133308" file="D:\Work\Tools\MATLAB\MUImodels2\muiApps\ModelUI\ModelUI.prj" location="D:\Work\Tools\MATLAB\MUImodels2\muiApps\ModelUI" name="ModelUI" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="499649692" file="D:\Matlab Code\MUImodels\muiApps\ModelUI\ModelUI.prj" location="D:\Matlab Code\MUImodels\muiApps\ModelUI" name="ModelUI" target="target.mlapps" target-name="Package App">
     <param.appname>ModelUI</param.appname>
     <param.authnamewatermark>Ian Townend</param.authnamewatermark>
     <param.email>i.townend@soton.ac.uk</param.email>
@@ -15,7 +15,7 @@
 VerticalProfile to illustrate the basic UI and a simple model producing spatial data
 SimpleTide to illustrate handling timeseries data in a similar UI.
 Diffusion2D to illustrate how to handle time plus 2 or 3 space dimensions.</param.description>
-    <param.screenshot>D:\Work\Tools\MATLAB\MUImodels2\muiApps\muiAppLogos\ModelUI_logo.png</param.screenshot>
+    <param.screenshot />
     <param.version>3.02</param.version>
     <param.products.name>
       <item>MATLAB</item>
@@ -24,12 +24,13 @@ Diffusion2D to illustrate how to handle time plus 2 or 3 space dimensions.</para
       <item>1</item>
     </param.products.id>
     <param.products.version>
-      <item>9.9</item>
+      <item>9.13</item>
     </param.products.version>
     <param.platforms />
     <param.output>${PROJECT_ROOT}</param.output>
     <param.guid>23792b88-1e0e-49e9-9fc1-5e451819a909</param.guid>
     <unset>
+      <param.screenshot />
       <param.platforms />
       <param.output />
     </unset>
@@ -47,20 +48,17 @@ Diffusion2D to illustrate how to handle time plus 2 or 3 space dimensions.</para
       <file>${PROJECT_ROOT}\help</file>
       <file>${PROJECT_ROOT}\info.xml</file>
       <file>${PROJECT_ROOT}\mui_logo.jpg</file>
-      <file>${PROJECT_ROOT}\vp_demo.mat</file>
-      <file>${PROJECT_ROOT}\VP_inputdata.txt</file>
-      <file>${PROJECT_ROOT}\VP_inputdata_add.txt</file>
       <file>${PROJECT_ROOT}\VPdata.m</file>
       <file>${PROJECT_ROOT}\VPdata_ff.m</file>
       <file>${PROJECT_ROOT}\VPformat.m</file>
     </fileset.resources>
     <fileset.package />
     <build-deliverables>
-      <file location="D:\Work\Tools\MATLAB\MUImodels2\muiApps" name="ModelUI" optional="false">D:\Work\Tools\MATLAB\MUImodels2\muiApps\ModelUI</file>
+      <file location="D:\Matlab Code\MUImodels\muiApps" name="ModelUI" optional="false">D:\Matlab Code\MUImodels\muiApps\ModelUI</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2020b</root>
+      <root>C:\Program Files\MATLAB\R2022b</root>
       <toolboxes />
     </matlab>
     <platform>
