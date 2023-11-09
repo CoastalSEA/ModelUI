@@ -55,7 +55,7 @@ classdef STmodel < muiDataSet
             modeltime = seconds(res.t);  %durataion data for rows
             modeltime.Format = 'd';
 %--------------------------------------------------------------------------
-% Asign model output to a dstable using the defined dsproperties meta-data
+% Assign model output to a dstable using the defined dsproperties meta-data
 %--------------------------------------------------------------------------                   
             %each variable should be an array in the 'results' cell array
             %if model returns single variable as array of doubles, use {results}
@@ -68,8 +68,7 @@ classdef STmodel < muiDataSet
             dst.Source = metaclass(obj).Name;
             dst.MetaData = sprintf('Model run for %d days',inp.Duration);
             %save results
-            dststruct = struct('dst1',dst,'dst2',dst); %add multiple tables
-            setDataSetRecord(obj,mobj.Cases,dststruct,'model');
+            setDataSetRecord(obj,mobj.Cases,dst,'model');
             getdialog('Run complete');
         end
     end
