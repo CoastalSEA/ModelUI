@@ -105,7 +105,8 @@ classdef Diffusion2D < muiModelUI
             menu.Analysis(1).Callback = repmat({@obj.analysisMenuOptions},[1,2]);
             
             %% Help menu --------------------------------------------------
-            menu.Help(1).Callback = {@obj.Help}; %make model specific?
+            menu.Help.List = {'Documentation','Manual'};
+            menu.Help.Callback = repmat({@obj.Help},[1,2]);
             
         end
 %% ------------------------------------------------------------------------
@@ -204,9 +205,15 @@ classdef Diffusion2D < muiModelUI
         end
 
         %% Help menu ------------------------------------------------------
-        function Help(~,~,~)
-            doc modelui
-        end     
+        function Help(~,src,~)
+            %menu to access online documentation and manual pdf file
+            switch src.Text
+                case 'Documentation'
+                    doc modelui   %must be name of html help file  
+                case 'Manual'
+                    mmui_open_manual;
+            end
+        end    
     end
 end    
     
