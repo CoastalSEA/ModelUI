@@ -11,7 +11,8 @@ ModelUI is written in Matlab(TM) and requires v2016b, or later. In addition, Mod
 ModelUI provides a generic interface for modelling applications that produce some combination of graphical and/or time series outputs. The purpose of this user interface (UI) is to enable the rapid prototyping of models by allowing the model developer to focus on the model, rather than the functional or operational needs of the software package itself.  To this end, the UI provides a standard interface with drop-down menus, tools to open and close files, keep track of model runs, provide a rapid means to implement model set-up and data import and export, derivation of new variables, and some basic plotting and statistical tools. 
 
 ##
-<<schematic.png>>
+![schematic](https://github.com/user-attachments/assets/bef8c457-7b58-4aa2-a84f-b2e639350271)
+
 
 ## ModelUI classes
 *ModelUI* - defines the behaviour of the main UI.
