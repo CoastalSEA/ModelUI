@@ -2,8 +2,7 @@
 % ModelUI is a generic interface for bespoke models and data analysis tools.
 
 %% Licence
-% The code is provided as Open Source code (issued under a GNU General 
-% Public License).
+% The code is provided as Open Source code (issued under a BSD 3-clause License).
 
 %% Requirements
 % ModelUI is written in Matlab(TM) and requires v2016b, or later. In addition, 
