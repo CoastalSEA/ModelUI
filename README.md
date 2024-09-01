@@ -13,7 +13,6 @@ ModelUI provides a generic interface for modelling applications that produce som
 ##
 ![schematic](https://github.com/user-attachments/assets/bef8c457-7b58-4aa2-a84f-b2e639350271)
 
-
 ## ModelUI classes
 *ModelUI* - defines the behaviour of the main UI.
 
